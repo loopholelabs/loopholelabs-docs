@@ -1,8 +1,10 @@
-import { source } from '@/app/source';
+import { architectSource, scaleSource } from '@/app/source';
 import { createSearchAPI } from 'fumadocs-core/search/server';
 
+const index = [...architectSource.getPages(), ...scaleSource.getPages()];
+
 export const { GET } = createSearchAPI('advanced', {
-  indexes: source.getPages().map((page) => ({
+  indexes: index.map((page) => ({
     title: page.data.title,
     description: page.data.description,
     structuredData: page.data.structuredData,

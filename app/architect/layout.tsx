@@ -7,7 +7,7 @@ export default function Layout({ children }: { children: ReactNode }) {
     <DocsLayout
         nav={{enabled: true, enableSearch: true, transparentMode: 'top'}}
         tree={architectSource.pageTree}
-        sidebar={{enabled: true, collapsible: true, hideSearch: true}}>
+        sidebar={{collapsible: false, hideSearch: false, footerProps: {className: 'hidden'}}}>
       {children}
     </DocsLayout>
   );

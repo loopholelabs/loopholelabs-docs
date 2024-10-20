@@ -7,7 +7,6 @@ export const architectSource = loader({
   source: createMDXSource(architectDocs, architectMeta),
 });
 
-
 export const scaleSource = loader({
   baseUrl: '/scale',
   source: createMDXSource(scaleDocs, scaleMeta),

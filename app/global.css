@@ -4,7 +4,8 @@
 
 @layer base {
   :root {
-    --radius: 0.5rem
+    --radius: 0.5rem;
+    --max-width: 1600px;
   }
 }
 
@@ -12,9 +13,43 @@
   max-width: 100vw !important;
 }
 
+@media screen and (min-width: 761px) {
+  #nd-docs-layout {
+    height: calc(100vh - 4rem);
+    @apply overflow-y-auto;
+  }
+}
+
+#nd-docs-layout::-webkit-scrollbar {
+  display: none;
+}
+
+@media screen and (min-width: 761px) {
+  #nd-docs-layout aside {
+    height: calc(100vh - 4rem);
+  }
+}
+
+@media screen and (min-width: 761px) {
+  #nd-docs-layout>div:last-child {
+    height: calc(100vh - 4rem);
+  }
+}
+
 #nd-docs-layout aside {
-  background-color: hsl(var(--background));
-  border-right: 1px solid hsl(var(--border));
+  @apply bg-transparent;
+  @apply border-r-0;
+}
+
+#nd-tocnav {
+  @apply mt-6;
+  @apply -mb-6;
+  @apply relative;
+  @apply top-0;
+  @apply rounded-none;
+  @apply border-none;
+  @apply shadow-none;
+  @apply drop-shadow-none;
 }
 
 h3.mb-1 {

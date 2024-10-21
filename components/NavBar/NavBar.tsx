@@ -3,7 +3,14 @@
 // Module imports
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDiscord, faGithub} from "@fortawesome/free-brands-svg-icons";
-import {faAngleDown} from "@fortawesome/free-solid-svg-icons";
+import {
+    NavigationMenu,
+    NavigationMenuContent,
+    NavigationMenuItem,
+    NavigationMenuLink,
+    NavigationMenuList,
+    NavigationMenuTrigger,
+} from "@/components/ui/navigation-menu"
 
 // Local imports
 import {Link} from "@/components/Link/Link";
@@ -12,10 +19,11 @@ import {ThemeToggle} from "@/components/ThemeToggle/ThemeToggle";
 import {SearchToggle} from "@/components/Search/Search";
 import {SidebarToggle} from "@/components/SidebarToggle/SidebarToggle";
 
+import {useScrollPosition} from "@/lib/hooks";
+
 import ArchitectLogoDark from "@/public/images/architect-logo-dark.svg";
 import ArchitectLogoLight from "@/public/images/architect-logo-light.svg";
 import LoopholeLabsIconLight from "@/public/images/loopholelabs-icon-dark.svg";
-import {useScrollPosition} from "@/lib/hooks";
 
 export function Links(props: {mobile?: boolean}) {
     return (
@@ -41,20 +49,41 @@ export function NavBar() {
     const layoutScrollPosition = useScrollPosition('nd-docs-layout');
     const windowScrollPosition = useScrollPosition('');
     return (
-        <nav className={`sticky top-0 z-50 w-full transition-colors backdrop-blur-md ${(layoutScrollPosition > 0 || windowScrollPosition > 0) ? 'border-b border-fd-border' : ''}`}>
-            <div className="max-w-[var(--max-width)] mx-auto px-4 sm:px-6 lg:px-8">
+        <NavigationMenu className={`sticky top-0 z-50 w-full transition-colors backdrop-blur-md max-w-full border-b border-fd-border ${(layoutScrollPosition > 0 || windowScrollPosition > 0) ? 'md:border-fd-border' : 'md:border-transparent'}`}>
+            <div className="w-full max-w-[var(--max-width)] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
-                    <div className="flex items-center">
-                        <div className={'flex items-center justify-center pr-4'}>
-                            <Img image={LoopholeLabsIconLight} alt="Loophole Labs icon" className="h-7 w-7 mr-2"
-                                 priority/>
-                            <FontAwesomeIcon icon={faAngleDown}
-                                             className="w-5 h-5 -mb-1 text-fd-primary dark:text-white"/>
+                    <NavigationMenuList>
+                        <div className="flex items-center">
+                            <NavigationMenuItem>
+                                <NavigationMenuTrigger>
+                                    <Img image={LoopholeLabsIconLight} alt="Loophole Labs icon" className="h-7 w-7 mr-2" priority/>
+                                </NavigationMenuTrigger>
+                                <NavigationMenuContent>
+                                    <ul className="grid gap-3 p-6 md:w-[400px] lg:w-[500px] lg:grid-cols-[.75fr_1fr]">
+                                        <li className="row-span-3">
+                                            <NavigationMenuLink asChild>
+                                                <a
+                                                    className="flex h-full w-full select-none flex-col justify-end rounded-md bg-gradient-to-b from-muted/50 to-muted p-6 no-underline outline-none focus:shadow-md"
+                                                    href="/"
+                                                >
+                                                    <div className="mb-2 mt-4 text-lg font-medium">
+                                                        shadcn/ui
+                                                    </div>
+                                                    <p className="text-sm leading-tight text-muted-foreground">
+                                                        Beautifully designed components that you can copy and
+                                                        paste into your apps. Accessible. Customizable. Open
+                                                        Source.
+                                                    </p>
+                                                </a>
+                                            </NavigationMenuLink>
+                                        </li>
+                                    </ul>
+                                </NavigationMenuContent>
+                            </NavigationMenuItem>
+                            <Img image={ArchitectLogoLight} alt="Architect logo" className="h-5 hidden dark:block" priority/>
+                            <Img image={ArchitectLogoDark} alt="Architect logo" className="h-5 dark:hidden" priority/>
                         </div>
-                        <Img image={ArchitectLogoLight} alt="Architect logo" className="h-5 hidden dark:block"
-                             priority/>
-                        <Img image={ArchitectLogoDark} alt="Architect logo" className="h-5 dark:hidden" priority/>
-                    </div>
+                    </NavigationMenuList>
                     <div className={'flex items-center justify-center pr-4'}>
                         <div className="flex items-center space-x-2 md:space-x-3">
                             <SearchToggle className={'w-full md:min-w-64'}/>
@@ -65,6 +94,6 @@ export function NavBar() {
                     </div>
                 </div>
             </div>
-        </nav>
+        </NavigationMenu>
     );
 }

@@ -16,6 +16,11 @@
 @media screen and (min-width: 761px) {
   #nd-docs-layout {
     height: calc(100vh - 4rem);
+  }
+}
+
+@media screen and (min-width: 768px) {
+  #nd-docs-layout {
     @apply overflow-y-auto;
   }
 }

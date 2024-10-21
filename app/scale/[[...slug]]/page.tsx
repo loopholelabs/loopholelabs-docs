@@ -20,13 +20,24 @@ export default async function Page({
   const MDX = page.data.body;
 
   return (
-    <DocsPage toc={page.data.toc} full={page.data.full}>
-      <DocsTitle>{page.data.title}</DocsTitle>
-      <DocsDescription>{page.data.description}</DocsDescription>
-      <DocsBody>
-        <MDX components={{ ...defaultMdxComponents }} />
-      </DocsBody>
-    </DocsPage>
+      <DocsPage
+          lastUpdate={page.data.lastModified}
+          toc={page.data.toc}
+          tableOfContent={{style: 'clerk'}}
+          full={page.data.full}
+          editOnGithub={{
+            owner: 'loopholelabs',
+            repo: 'loopholelabs-docs',
+            sha: 'main',
+            path: `content/scale/${page.file.path}`,
+          }}
+      >
+        <DocsTitle>{page.data.title}</DocsTitle>
+        <DocsDescription>{page.data.description}</DocsDescription>
+        <DocsBody>
+          <MDX components={{ ...defaultMdxComponents }} />
+        </DocsBody>
+      </DocsPage>
   );
 }
 

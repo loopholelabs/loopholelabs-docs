@@ -5,7 +5,7 @@
 @layer base {
   :root {
     --radius: 0.5rem;
-    --max-width: 1600px;
+    --max-width: 1400px;
   }
 }
 
@@ -37,7 +37,7 @@
 }
 
 #nd-docs-layout aside {
-  @apply bg-transparent;
+  @apply md:bg-transparent;
   @apply border-r-0;
 }
 
@@ -52,6 +52,14 @@
   @apply drop-shadow-none;
 }
 
+#nd-subnav {
+  @apply hidden;
+}
+
 h3.mb-1 {
   margin-bottom: 0;
+}
+
+button.inline-flex.items-center.rounded-full.border.p-0\.5 {
+  @apply p-1.5;
 }

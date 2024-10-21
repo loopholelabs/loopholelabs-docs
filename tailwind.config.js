@@ -75,7 +75,7 @@ export default {
   ],
   presets: [createPreset({
       preset: twilightPreset,
-      layoutWidth: '1600px',
+      layoutWidth: '1400px',
   })],
     plugins: [require("tailwindcss-animate")],
     theme: {

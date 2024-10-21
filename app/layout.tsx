@@ -4,6 +4,8 @@ import {ThemeProvider} from "next-themes";
 import {Inter} from 'next/font/google';
 import type {ReactNode} from 'react';
 
+import {Provider} from "@/app/provider";
+
 import {Footer} from "@/components/Footer/Footer";
 import {NavBar} from "@/components/NavBar/NavBar";
 
@@ -16,8 +18,10 @@ export default function Layout({children}: { children: ReactNode }) {
         <html lang="en" className={inter.className} suppressHydrationWarning>
         <body>
         <ThemeProvider enableSystem={true} defaultTheme={'system'} attribute={'class'} enableColorScheme={true}>
-            <NavBar/>
-            <RootProvider theme={{enabled: false}}>{children}</RootProvider>
+            <Provider>
+                <NavBar/>
+                {children}
+            </Provider>
             <Footer/>
         </ThemeProvider>
         </body>

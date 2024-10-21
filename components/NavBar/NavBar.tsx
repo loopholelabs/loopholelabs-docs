@@ -1,3 +1,5 @@
+'use client';
+
 // Module imports
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDiscord, faGithub} from "@fortawesome/free-brands-svg-icons";
@@ -13,16 +15,17 @@ import {SidebarToggle} from "@/components/SidebarToggle/SidebarToggle";
 import ArchitectLogoDark from "@/public/images/architect-logo-dark.svg";
 import ArchitectLogoLight from "@/public/images/architect-logo-light.svg";
 import LoopholeLabsIconLight from "@/public/images/loopholelabs-icon-dark.svg";
+import {useScrollPosition} from "@/lib/hooks";
 
 export function Links(props: {mobile?: boolean}) {
     return (
         <div className={`flex-row items-center border-l h-[90%] pl-4 ${props.mobile ? 'flex' : 'hidden md:flex'} space-x-3`}>
             <Link href="https://loopholelabs.io/discord"
-                  className="border border-fd-border bg-transparent hover:bg-fd-accent hover:border-transparent text-fd-accent-foreground dark:text-white p-2 rounded-md transition duration-300">
+                  className="inline-flex p-2 border border-fd-border bg-transparent hover:bg-fd-accent hover:border-transparent text-fd-accent-foreground dark:text-white rounded-md transition duration-300">
                 <FontAwesomeIcon icon={faDiscord} className="w-5 h-5"/>
             </Link>
             <Link href="https://github.com/loopholelabs"
-                  className="border border-fd-border bg-transparent hover:bg-fd-accent hover:border-transparent text-fd-accent-foreground dark:text-white p-2 rounded-md transition duration-300">
+                  className="inline-flex p-2 border border-fd-border bg-transparent hover:bg-fd-accent hover:border-transparent text-fd-accent-foreground dark:text-white rounded-md transition duration-300">
                 <FontAwesomeIcon icon={faGithub} className="w-5 h-5"/>
             </Link>
         </div>
@@ -35,8 +38,10 @@ export function Links(props: {mobile?: boolean}) {
  * @component
  */
 export function NavBar() {
+    const layoutScrollPosition = useScrollPosition('nd-docs-layout');
+    const windowScrollPosition = useScrollPosition('');
     return (
-        <nav className="sticky top-0 z-50 w-full transition-colors backdrop-blur-md">
+        <nav className={`sticky top-0 z-50 w-full transition-colors backdrop-blur-md ${(layoutScrollPosition > 0 || windowScrollPosition > 0) ? 'border-b border-fd-border' : ''}`}>
             <div className="max-w-[var(--max-width)] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     <div className="flex items-center">

@@ -6,7 +6,7 @@ import {MenuIcon, XIcon} from "lucide-react";
 
 import {cn} from "@/lib/utils";
 import {buttonVariants} from "@/lib/variants";
-import {useAttributeObserver} from "@/lib/mutation";
+import {useAttributeObserver} from "@/lib/hooks";
 
 export function SidebarToggle(props: ButtonHTMLAttributes<HTMLButtonElement>): ReactElement {
     const [open, setOpen] = useState(false);

@@ -6,6 +6,15 @@ const withMDX = createMDX();
 const config = {
   reactStrictMode: true,
   basePath: '/docs',
+  async redirects() {
+    return [
+      {
+        source: '/',
+        destination: '/architect',
+        permanent: true,
+      },
+    ]
+  },
 };
 
 export default withMDX(config);

@@ -10,9 +10,7 @@ export default function Layout({ children }: { children: ReactNode }) {
         nav={{enabled: true}}
         tree={architectSource.pageTree}
         sidebar={{collapsible: false, hideSearch: true, footerProps: {className: 'py-3 md:hidden flex-row-reverse justify-between'}, footer: <Links mobile />}}>
-      <div>
-      </div>
-      {children}
+        {children}
     </DocsLayout>
   );
 }

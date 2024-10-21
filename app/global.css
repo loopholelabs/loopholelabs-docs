@@ -41,15 +41,13 @@
   @apply border-r-0;
 }
 
+#nd-docs-layout > div:first-of-type {
+  @apply h-max;
+}
+
 #nd-tocnav {
-  @apply mt-6;
-  @apply -mb-6;
-  @apply relative;
-  @apply top-0;
-  @apply rounded-none;
-  @apply border-none;
-  @apply shadow-none;
-  @apply drop-shadow-none;
+  @apply top-16;
+  @apply md:top-8;
 }
 
 #nd-subnav {

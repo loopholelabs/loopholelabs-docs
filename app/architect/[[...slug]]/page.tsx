@@ -20,7 +20,18 @@ export default async function Page({
   const MDX = page.data.body;
 
   return (
-      <DocsPage toc={page.data.toc} full={page.data.full}>
+      <DocsPage
+          lastUpdate={page.data.lastModified}
+          toc={page.data.toc}
+          tableOfContent={{style: 'clerk'}}
+          full={page.data.full}
+          editOnGithub={{
+              owner: 'loopholelabs',
+              repo: 'loopholelabs-docs',
+              sha: 'main',
+              path: `content/architect/${page.file.path}`,
+          }}
+      >
         <DocsTitle>{page.data.title}</DocsTitle>
         <DocsDescription>{page.data.description}</DocsDescription>
         <DocsBody>

@@ -1,0 +1,22 @@
+{
+  "title": "Architect",
+  "root": true,
+  "pages": [
+    "---Guide---",
+    "index",
+    "comparisons",
+    "...",
+    "---Writing---",
+    "markdown",
+    "page-conventions",
+    "navigation",
+    "---References---",
+    "components",
+    "mdx",
+    "blocks",
+    "(integrations)",
+    "---Others---",
+    "museum",
+    "[Vercel](https://vercel.com)"
+  ]
+}

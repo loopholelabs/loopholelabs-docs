@@ -14,6 +14,7 @@ export function Provider({children}: { children: ReactNode }) {
         // @ts-ignore
         <SearchContext.Provider value={{searchOpen: searchOpen, setSearchOpen: setSearchOpen}}>
             <RootProvider search={{SearchDialog: CustomSearchDialog, options: {
+                    api: '/docs/api/search',
                     defaultTag: 'architect',
                     tags: [
                         {

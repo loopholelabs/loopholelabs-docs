@@ -17,7 +17,7 @@ import {Link} from "@/components/Link/Link";
 import Img from "@/components/Img/Img";
 import {ThemeToggle} from "@/components/ThemeToggle/ThemeToggle";
 import {SearchToggle} from "@/components/Search/Search";
-import {SidebarToggle} from "@/components/SidebarToggle/SidebarToggle";
+import {SidebarToggle} from "@/components/Sidebar/Sidebar";
 
 import {useScrollPosition} from "@/lib/hooks";
 
@@ -25,9 +25,9 @@ import ArchitectLogoDark from "@/public/images/architect-logo-dark.svg";
 import ArchitectLogoLight from "@/public/images/architect-logo-light.svg";
 import LoopholeLabsIconLight from "@/public/images/loopholelabs-icon-dark.svg";
 
-export function Links(props: {mobile?: boolean}) {
+export function Links() {
     return (
-        <div className={`flex-row items-center border-l h-[90%] pl-4 ${props.mobile ? 'flex' : 'hidden md:flex'} space-x-3`}>
+        <div className={`flex-row items-center border-l h-[90%] pl-4 hidden md:flex space-x-3`}>
             <Link href="https://loopholelabs.io/discord"
                   className="inline-flex p-2 border border-fd-border bg-transparent hover:bg-fd-accent hover:border-transparent text-fd-accent-foreground dark:text-white rounded-md transition duration-300">
                 <FontAwesomeIcon icon={faDiscord} className="w-5 h-5"/>
@@ -49,7 +49,7 @@ export function NavBar() {
     const layoutScrollPosition = useScrollPosition('nd-docs-layout');
     const windowScrollPosition = useScrollPosition('');
     return (
-        <NavigationMenu className={`sticky top-0 z-50 w-full transition-colors backdrop-blur-md max-w-full border-b border-fd-border ${(layoutScrollPosition > 0 || windowScrollPosition > 0) ? 'md:border-fd-border' : 'md:border-transparent'}`}>
+        <NavigationMenu className={`sticky top-0 z-50 w-full transition-colors bg-opacity-80 bg-fd-background backdrop-blur-md max-w-full border-b border-fd-border ${(layoutScrollPosition > 0 || windowScrollPosition > 0) ? 'md:border-fd-border' : 'md:border-transparent'}`}>
             <div className="w-full max-w-[var(--max-width)] mx-auto px-4 sm:px-6 lg:px-8">
                 <div className="flex justify-between items-center h-16">
                     <NavigationMenuList>

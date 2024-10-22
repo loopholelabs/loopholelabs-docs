@@ -23,5 +23,4 @@ const index = [...architectSource.getPages().map((page) => {
 
 export const { GET } = createSearchAPI('advanced', {
   indexes: index,
-  tag: true,
 });

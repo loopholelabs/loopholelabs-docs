@@ -1,19 +1,15 @@
-import {DocsLayout} from 'fumadocs-ui/layout';
+import {DocsLayout} from 'fumadocs-ui/layouts/docs';
 import type {ReactNode} from 'react';
-import {scaleSource} from '@/app/source';
-import {Links} from "@/components/NavBar/NavBar";
 
-export default function Layout({children}: { children: ReactNode }) {
+import {scaleSource} from '@/app/source';
+import {SidebarFooter} from "@/components/Sidebar/Sidebar";
+
+export default function Layout({ children }: { children: ReactNode }) {
     return (
         <DocsLayout
-            nav={{enabled: true}}
             tree={scaleSource.pageTree}
-            sidebar={{
-                collapsible: false,
-                hideSearch: true,
-                footerProps: {className: 'py-3 md:hidden flex-row-reverse justify-between'},
-                footer: <Links mobile/>
-            }}>
+            disableThemeSwitch={true}
+            sidebar={{enabled: true, tabs: false, collapsible: false, hideSearch: true, footer: <SidebarFooter />}}>
             {children}
         </DocsLayout>
     );

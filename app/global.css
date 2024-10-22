@@ -43,16 +43,28 @@
 
 #nd-docs-layout aside {
   @apply md:bg-transparent;
-  @apply border-r-0;
 }
 
 #nd-docs-layout > div:first-of-type {
   @apply h-max;
 }
 
+#nd-sidebar div > div:nth-last-child(2) {
+  @apply py-3;
+  @apply md:hidden;
+}
+
+#nd-sidebar > div:first-of-type {
+  @apply relative;
+  @apply border-r-0;
+}
+
 #nd-tocnav {
+  @apply md:bg-transparent;
   @apply top-16;
-  @apply md:top-8;
+  @apply md:top-2;
+  @apply py-2;
+  @apply md:py-0;
 }
 
 #nd-subnav {

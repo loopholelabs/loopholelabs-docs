@@ -48,15 +48,9 @@ export function SearchToggle(props: ButtonHTMLAttributes<HTMLButtonElement>): Re
     );
 }
 
-export default function CustomSearchDialog({
-                                               defaultTag,
-                                               tags,
-                                               api,
-                                               delayMs,
-                                               ...props
-                                           }: CustomSearchDialogProps): ReactElement {
+export default function CustomSearchDialog({defaultTag, tags, api, delayMs, ...props}: CustomSearchDialogProps): ReactElement {
     const [tag, setTag] = useState(defaultTag);
-    const {search, setSearch, query} = useDocsSearch('', tag, '/docs/api/search', delayMs);
+    const {search, setSearch, query} = useDocsSearch({type: 'fetch', api: api}, undefined, tag, delayMs);
 
     // @ts-ignore
     const {searchOpen, setSearchOpen} = useContext(SearchContext);

@@ -39,22 +39,13 @@ export function SearchToggle(props: ButtonHTMLAttributes<HTMLButtonElement>): Re
                 <SearchIcon className="ms-1 size-4"/>
                 Search
                 <div className="ms-auto inline-flex gap-0.5">
-                    <kbd className="rounded-md border bg-fd-background px-1.5">⌘</kbd>
-                    <kbd className="rounded-md border bg-fd-background px-1.5">K</kbd>
+                    <kbd className="rounded-md border bg-fd-background px-1.5 pointer-events-none h-5 select-none items-center gap-1 text-[12px] font-medium flex" >
+                        <span className="text-sm -mb-[0.5px]">⌘</span>K
+                    </kbd>
                 </div>
             </button>
         </>
     );
-}
-
-export function OpenSearch(): ReactElement {
-    // @ts-ignore
-    const {setSearchOpen} = useContext(SearchContext);
-    return (
-        <button onClick={() => {
-            setSearchOpen(true)
-        }}>SEARCH</button>
-    )
 }
 
 export default function CustomSearchDialog({

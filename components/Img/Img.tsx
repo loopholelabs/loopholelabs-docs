@@ -6,6 +6,7 @@ interface ImgProps {
     image: StaticImageData;
     width?: number | null;
     height?: number | null;
+    id?: string;
     alt?: string;
     className?: string;
     priority?: boolean;
@@ -18,13 +19,14 @@ function rawImg(props: ImgProps, ref: LegacyRef<HTMLImageElement> | undefined) {
         width = null,
         height = null,
 
+        id = undefined,
         alt = "",
         className = "",
         priority = false,
     } = props;
 
     return (
-        <img ref={ref} className={className} width={width !== null ? width : image.width}
+        <img id={id} ref={ref} className={className} width={width !== null ? width : image.width}
              height={height !== null ? height : image.height} alt={alt} decoding={'async'}
              fetchPriority={priority ? 'high' : 'low'} loading={priority ? 'eager' : 'lazy'} src={image.src} />
     )
@@ -48,7 +50,7 @@ const Img = forwardRef<HTMLImageElement | null, ImgProps>(function Img(props, re
 
         width = null,
         height = null,
-
+        id = undefined,
         alt = "",
         className = "",
         priority = false,
@@ -59,7 +61,7 @@ const Img = forwardRef<HTMLImageElement | null, ImgProps>(function Img(props, re
     }
 
     return (
-        <Image priority={priority} loading={priority ? 'eager' : 'lazy'} ref={ref}
+        <Image id={id} priority={priority} loading={priority ? 'eager' : 'lazy'} ref={ref}
                className={className} width={width !== null ? width : image.width}
                height={height !== null ? height : image.height} sizes="100vw" src={image.src} alt={alt}
                style={{width: '100%', height: 'auto'}}/>

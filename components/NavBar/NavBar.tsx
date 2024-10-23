@@ -10,15 +10,13 @@ import Img from "@/components/Img/Img";
 import {ThemeToggle} from "@/components/ThemeToggle/ThemeToggle";
 import {SearchToggle} from "@/components/Search/Search";
 import {SidebarToggle} from "@/components/Sidebar/Sidebar";
-import {Tabs, TabsList, TabsTrigger} from "@/components/ui/tabs";
 
 import {useScrollPosition} from "@/lib/hooks";
 
-import ArchitectIconDark from "@/public/images/architect-icon-dark.svg";
-import ArchitectIconLight from "@/public/images/architect-icon-light.svg";
-import ScaleIconLight from "@/public/images/scale-icon.svg";
+import LoopholeLabsLogoDark from "@/public/images/loopholelabs-logo-dark.svg";
 import LoopholeLabsLogoLight from "@/public/images/loopholelabs-logo-light.svg";
-import LoopholeLabsDocsLogoDark from "@/public/images/loopholelabs-logo-docs-dark.svg";
+import LoopholeLabsIconDark from "@/public/images/loopholelabs-icon-dark.svg";
+import LoopholeLabsIconLight from "@/public/images/loopholelabs-icon-light.svg";
 
 export function Links() {
     return (
@@ -35,26 +33,6 @@ export function Links() {
     )
 }
 
-export function Products() {
-    const handleTabChange = (value: string) => {
-        console.log(value);
-    }
-    return (
-        <Tabs defaultValue="architect" className="w-max bg-transparent dark:bg-transparent" onValueChange={handleTabChange}>
-            <TabsList className="bg-transparent dark:bg-transparent border dark:border border-fd-border dark:border-fd-border inline-flex h-10 items-center justify-between rounded-md p-1 w-max">
-                <TabsTrigger value="architect" className={'px-2 py-0.5 inline-flex justify-start w-max bg-transparent dark:bg-transparent data-[state=active]:bg-fd-accent dark:data-[state=active]:bg-fd-accent data-[state=active]:text-fd-accent-foreground text-fd-muted-foreground dark:text-fd-muted-foreground dark:data-[state=active]:text-fd-accent-foreground'}>
-                    <Img image={ArchitectIconLight} alt="Architect icon" className="h-5 w-auto" priority/>
-                    <p className={'pl-1.5 font-normal text-lg'}>Architect</p>
-                </TabsTrigger>
-                <TabsTrigger value="scale" className={'px-2 py-0.5 inline-flex justify-start w-max bg-transparent dark:bg-transparent data-[state=active]:bg-fd-accent dark:data-[state=active]:bg-fd-accent data-[state=active]:text-fd-accent-foreground text-fd-muted-foreground dark:text-fd-muted-foreground dark:data-[state=active]:text-fd-accent-foreground'}>
-                    <Img image={ScaleIconLight} alt="Scale icon" className="h-5 w-auto text-white" priority/>
-                    <p className={'pl-1.5 font-normal text-lg'}>Scale</p>
-                </TabsTrigger>
-            </TabsList>
-        </Tabs>
-    );
-}
-
 /**
  * Renders the NavBar component.
  *
@@ -64,15 +42,24 @@ export function NavBar() {
     const layoutScrollPosition = useScrollPosition('nd-docs-layout');
     const windowScrollPosition = useScrollPosition('');
     return (
-        <nav
-            className={`pt-2 fixed md:absolute top-0 z-50 w-full transition-colors bg-opacity-80 bg-fd-background backdrop-blur-md max-w-full border-b border-fd-border ${(layoutScrollPosition > 0 || windowScrollPosition > 0) ? 'md:border-fd-border' : 'md:border-transparent'}`}>
+        <nav className={`pt-2 fixed md:absolute top-0 z-50 w-full transition-colors bg-opacity-80 bg-fd-background backdrop-blur-md max-w-full border-b border-fd-border ${(layoutScrollPosition > 0 || windowScrollPosition > 0) ? 'md:border-fd-border' : 'md:border-transparent'}`}>
             <div className="w-full max-w-[var(--max-width)] mx-auto px-2 md:px-4">
                 <div className="flex justify-between items-center h-16">
                     <div className="flex items-center w-max">
-                        <Link href={'https://loopholelabs.io'} className={'w-max mr-8 -mt-2'}>
-                            <Img image={LoopholeLabsDocsLogoDark} alt="Loophole Labs logo" className={'h-auto'} priority/>
-                        </Link>
-                        <Products/>
+                        <div id={'logo'} className={'w-full -mt-2 flex items-center justify-start space-x-2'}>
+                            <Link href={'https://loopholelabs.io'} className={'w-full hidden md:block'}>
+                                <Img image={LoopholeLabsLogoDark} alt="Loophole Labs logo" className={'hidden dark:block'} priority/>
+                                <Img image={LoopholeLabsLogoLight} alt="Loophole Labs logo" className={'dark:hidden'} priority/>
+                            </Link>
+                            <Link href={'https://loopholelabs.io'} className={'w-full md:hidden'}>
+                                <Img image={LoopholeLabsIconDark} alt="Loophole Labs icon" className={'h-6 w-6 hidden dark:block'} priority/>
+                                <Img image={LoopholeLabsIconLight} alt="Loophole Labs icon" className={'h-6 w-6 dark:hidden'} priority/>
+                            </Link>
+                            <span className={'md:-mb-1.5 text-[20px] md:text-[18px] font-light text-[#2C0F62] dark:text-white font-mono'}>|</span>
+                            <Link href={'https://loopholelabs.io/docs/architect'}>
+                                <p className={'-mb-1 md:-mb-2 md:-ml-0.5 font-semibold md:font-medium text-[16px] md:text-[20px] text-[#2C0F62] dark:text-white'}>Docs</p>
+                            </Link>
+                        </div>
                     </div>
                     <div className={'flex items-center justify-center pr-4 md:w-full'}>
                         <div className="flex items-center space-x-2 md:space-x-3 md:w-full justify-end">

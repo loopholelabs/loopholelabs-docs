@@ -67,6 +67,7 @@ export default {
   darkMode: ['class'],
   content: [
     './node_modules/fumadocs-ui/dist/**/*.js',
+    './node_modules/fumadocs-openapi/dist/**/*.js',
 
     './components/**/*.{ts,tsx}',
     './app/**/*.{ts,tsx}',

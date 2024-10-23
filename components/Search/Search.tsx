@@ -31,8 +31,7 @@ export function SearchToggle(props: ButtonHTMLAttributes<HTMLButtonElement>): Re
                     }}>
                 <SearchIcon/>
             </button>
-            <button type="button" data-search-full="" {...props}
-                    className={cn('items-center gap-2 rounded-full border bg-fd-secondary/50 p-1.5 text-sm text-fd-muted-foreground transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground hover:border-transparent hidden md:inline-flex', props.className)}
+            <button type="button" data-search-full="" {...props} className={cn('items-center gap-2 rounded-full border bg-fd-secondary/50 p-1.5 text-sm text-fd-muted-foreground transition-colors hover:bg-fd-accent hover:text-fd-accent-foreground hover:border-transparent hidden md:inline-flex', props.className)}
                     onClick={() => {
                         setSearchOpen(true);
                     }}>

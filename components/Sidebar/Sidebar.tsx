@@ -28,7 +28,7 @@ export function SidebarToggle(props: ButtonHTMLAttributes<HTMLButtonElement>): R
 
 export function SidebarFooter() {
     return (
-        <div className={'flex items-center justify-end border-t border-fd-border'}>
+        <div className={'flex items-center justify-end border-t border-fd-border md:border-transparent'}>
             <div className={'pr-4'}>
                 <ThemeToggle />
             </div>

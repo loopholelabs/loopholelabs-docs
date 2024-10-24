@@ -1,4 +1,5 @@
 import {defineConfig, defineCollections, frontmatterSchema, metaSchema} from 'fumadocs-mdx/config';
+import {remarkInstall} from "fumadocs-docgen";
 
 export const architectDocs = defineCollections({
     type: 'doc',
@@ -39,4 +40,7 @@ export const polyglotMeta = defineCollections({
 export default defineConfig({
     lastModifiedTime: "git",
     generateManifest: true,
+    mdxOptions: {
+        remarkPlugins: [remarkInstall]
+    }
 });

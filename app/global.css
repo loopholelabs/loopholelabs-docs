@@ -46,6 +46,7 @@ body {
 
 #nd-page {
   @apply h-max;
+  @apply lg:pt-1.5;
 }
 
 @media screen and (min-width: 768px) {
@@ -122,6 +123,10 @@ body {
 
 #nd-page article {
   @apply lg:pt-4;
+}
+
+#nd-sidebar {
+  @apply lg:pt-6;
 }
 
 #nd-sidebar > div > div:nth-of-type(2) {

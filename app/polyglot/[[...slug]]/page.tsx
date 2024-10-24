@@ -7,7 +7,9 @@ import {
 } from 'fumadocs-ui/page';
 import {notFound} from 'next/navigation';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
+
 import {polyglotMetadataImage} from "@/lib/metadata";
+
 
 export default async function Page({
                                        params,

@@ -1,0 +1,131 @@
+---
+title: Specification Reference
+description: Detailed technical specification of the Polyglot binary format and type system
+---
+
+# Binary Format
+Polyglot uses a simple binary format consisting of repeating type-value pairs. Each entry in a Polyglot buffer follows this pattern:
+```markdown title="Binary Format"
+| Type (1 byte) | Payload (0+ bytes) |
+```
+
+The default buffer size is 512 bytes, though buffers can grow as needed.
+
+## Type System
+
+### Basic Types
+
+| Identifier | Type    | Description                 |
+|------------|---------|-----------------------------|
+| 0x00       | Nil     | Represents absence of value |
+| 0x07       | Boolean | True (0x01) or False (0x00) |
+| 0x08       | Uint8   | 8-bit unsigned integer      |
+| 0x09       | Uint16  | 16-bit unsigned integer     |
+| 0x0a       | Uint32  | 32-bit unsigned integer     |
+| 0x0b       | Uint64  | 64-bit unsigned integer     |
+| 0x0c       | Int32   | 32-bit signed integer       |
+| 0x0d       | Int64   | 64-bit signed integer       |
+| 0x0e       | Float32 | IEEE 754 32-bit float       |
+| 0x0f       | Float64 | IEEE 754 64-bit float       |
+
+### Collection Types
+| Identifier | Type   | Description          |
+|------------|--------|----------------------|
+| 0x01       | Array  | Ordered collection   |
+| 0x02       | Map    | Key-value collection |
+| 0x04       | Bytes  | Raw byte buffer      |
+| 0x05       | String | UTF-8 encoded text   |
+
+### Special Types
+| Identifier | Type  | Description   |
+|------------|-------|---------------|
+| 0x03       | Any   | Dynamic type  |
+| 0x06       | Error | Error message |
+
+## Type Details
+
+### Nil Type (0x00)
+
+- Single byte identifier
+- No payload
+- Used to represent null/nil/None values
+
+### Array Type (0x01)
+```markdown title="Array Type Format"
+| 0x01 | Element Type (1 byte) | Size (4 bytes) | Elements... |
+```
+
+- Element Type indicates the type of all elements
+- Size is uint32 indicating number of elements
+- Elements follow in sequence, each with their respective payloads
+- Can use Any (0x03) as element type for mixed-type arrays
+
+### Map Type (0x02)
+```markdown title="Map Type Format"
+| 0x02 | Key Type (1 byte) | Value Type (1 byte) | Size (4 bytes) | Key-Value Pairs... |
+```
+
+- Key and Value types specified separately
+- Size is uint32 indicating number of pairs
+- Pairs follow in sequence: key, value, key, value...
+- Value Type can be Any (0x03) for mixed-type values
+
+### String Type (0x05)
+```markdown title="Map Type Format"
+| 0x05 | Size (4 bytes) | UTF-8 Bytes... |
+```
+
+- Size is uint32 indicating number of bytes
+- Content is UTF-8 encoded
+- No null termination
+
+### Bytes Type (0x04)
+```markdown title="Map Type Format"
+| 0x04 | Size (4 bytes) | Raw Bytes... |
+```
+
+- Size is uint32 indicating number of bytes
+- Raw byte content follows
+
+### Error Type (0x06)
+```markdown title="Map Type Format"
+| 0x06 | Size (4 bytes) | UTF-8 Message... |
+```
+
+- Encodes error messages as UTF-8 strings
+- Size is uint32 indicating message length in bytes
+- Language implementations convert to native error types
+
+### Integer Types
+All integers are encoded in big-endian format:
+
+- Most significant byte first
+- Fixed width based on type
+- No variable-length encoding
+
+### Float Types
+
+- Follow IEEE 754 standard
+- 32-bit (Float32) or 64-bit (Float64) precision
+- Encoded in big-endian format
+
+## Buffer Management
+
+- Default buffer size: 512 bytes
+- Buffers can grow dynamically
+- No internal fragmentation
+- No padding between elements
+- Zero-copy operations where possible
+
+## Limitations
+
+- No schema versioning
+- No optional fields
+- No type inheritance
+- No variable-length integers
+- No compression
+- No cyclic references
+- No metadata
+- No padding or alignment
+
+These limitations are intentional design choices that enable Polyglot's high-performance characteristics.

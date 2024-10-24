@@ -1,0 +1,76 @@
+---
+title: Design Philosophy
+description: Understanding the core design principles and tradeoffs in Polyglot
+---
+
+# Design Decisions
+
+Polyglot's design is guided by a clear set of principles that prioritize performance and simplicity over flexibility
+and features. This page explains these core design decisions and their implications.
+
+## Core Principles
+
+### 1. Performance First
+Polyglot's primary design goal is maximum performance. This manifests in several ways:
+
+- **Zero-Copy Operations**: Where possible, Polyglot operates directly on memory buffers without requiring intermediate copies
+- **Minimal Allocations**: The framework is designed to minimize memory allocations, with features like buffer reuse
+- **Simple Format**: The binary format is straightforward, requiring minimal processing to encode or decode
+- **Direct Mapping**: Types map directly to their binary representations without additional metadata
+
+### 2. Simplicity Over Flexibility
+Polyglot intentionally omits features common in other serialization frameworks to maintain simplicity:
+
+- No schema versioning
+- No type negotiation
+- No backward/forward compatibility
+- No runtime type discovery
+- No optional fields
+
+This means both ends of a Polyglot communication channel must have matching expectations about the data structure being transmitted.
+
+### 3. Explicit Over Implicit
+The framework favors explicit operations over implicit behavior:
+
+- Explicit type specifications for collections
+- Direct memory management in C
+- Clear boundaries between encoding and decoding operations
+- No automatic type coercion
+
+## Key Tradeoffs
+
+### Schema Evolution vs Performance
+The most significant tradeoff in Polyglot is the decision to omit schema evolution capabilities. This means:
+
+#### Benefits
+
+- No version checking overhead
+- No need to store schema information
+- Minimal parsing required
+- Smaller message sizes
+- Predictable performance
+
+#### Limitations
+
+- Both ends must maintain matching type definitions
+- No backward compatibility between versions
+- Changes require coordinated updates
+
+### Memory Management vs Convenience
+Polyglot provides different memory management patterns for different languages:
+
+- C: Explicit allocation and deallocation
+- Go: Optional buffer pooling for reuse
+- Rust: Leverage the ownership system
+- TypeScript: Automatic memory management
+
+This allows each language to use its natural memory management patterns while still maintaining high performance.
+
+## Implementation Principles
+The implementation follows these guidelines:
+
+1. **Minimal Dependencies**: Each language implementation has minimal external dependencies
+2. **Consistent API**: While respecting each language's idioms, the API remains conceptually consistent
+3. **Predictable Performance**: Operations have consistent, predictable performance characteristics
+4. **Error Handling**: Clear error handling that respects each language's conventions
+5. **Buffer Management**: Efficient buffer management appropriate for each language

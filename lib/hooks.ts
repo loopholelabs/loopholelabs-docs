@@ -1,8 +1,10 @@
 import {useEffect, useState} from 'react';
+import {usePathname} from "next/navigation";
 
 type AttributeCallback = (value: string | null) => void;
 
 export function useAttributeObserver(elementId: string, attributeName: string, callback: AttributeCallback): void {
+    const pathname = usePathname();
     useEffect(() => {
         const targetElement = document.getElementById(elementId);
         if (!targetElement) {
@@ -25,7 +27,7 @@ export function useAttributeObserver(elementId: string, attributeName: string, c
             attributeFilter: [attributeName]
         });
         return () => observer.disconnect();
-    }, [elementId, attributeName, callback]);
+    }, [elementId, attributeName, callback, pathname]);
 }
 
 export function useScrollPosition(elementId: string): number {

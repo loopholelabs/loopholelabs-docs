@@ -1,6 +1,7 @@
 'use client';
 
-import {type ButtonHTMLAttributes, type ReactElement, useState} from "react";
+import {type ButtonHTMLAttributes, type ReactElement, useEffect, useState} from "react";
+import {usePathname} from "next/navigation";
 import {SidebarTrigger} from 'fumadocs-core/sidebar';
 import {MenuIcon, XIcon} from "lucide-react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -14,6 +15,14 @@ import {ThemeToggle} from "@/components/ThemeToggle/ThemeToggle";
 
 export function SidebarToggle(props: ButtonHTMLAttributes<HTMLButtonElement>): ReactElement {
     const [open, setOpen] = useState(false);
+    const pathname = usePathname();
+    useEffect(() => {
+        const sidebar = document.getElementById('nd-sidebar');
+        if (sidebar) {
+            const isOpen = sidebar.getAttribute('data-open') === 'true';
+            setOpen(isOpen);
+        }
+    }, [pathname]);
     useAttributeObserver('nd-sidebar', 'data-open', (newValue) => {
         setOpen(newValue == "true");
     });

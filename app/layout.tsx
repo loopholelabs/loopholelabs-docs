@@ -26,7 +26,7 @@ export default function Layout({children}: { children: ReactNode }) {
     const compiledClassName = useMemo(() => cn(
         apercuFont.variable,
         interFont.variable,
-    ), [])
+    ), []);
     return (
         <html lang="en" className={compiledClassName} suppressHydrationWarning>
         <body>

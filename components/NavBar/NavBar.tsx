@@ -9,13 +9,12 @@ import {Link} from "@/components/Link/Link";
 import Img from "@/components/Img/Img";
 import {ThemeToggle} from "@/components/ThemeToggle/ThemeToggle";
 import {SearchToggle} from "@/components/Search/Search";
-import {SidebarToggle} from "@/components/Sidebar/Sidebar";
+import {SidebarToggle} from "@/components/Sidebar/Sidebar.client";
 
 import {useScrollPosition} from "@/lib/hooks";
 
 import LoopholeLabsLogoDark from "@/public/images/loopholelabs-logo-dark.svg";
 import LoopholeLabsLogoLight from "@/public/images/loopholelabs-logo-light.svg";
-import LoopholeLabsIconDark from "@/public/images/loopholelabs-icon-dark.svg";
 import LoopholeLabsIconLight from "@/public/images/loopholelabs-icon-light.svg";
 
 export function Links() {
@@ -52,12 +51,11 @@ export function NavBar() {
                                 <Img image={LoopholeLabsLogoLight} alt="Loophole Labs logo" className={'dark:hidden'} priority/>
                             </Link>
                             <Link href={'https://loopholelabs.io'} className={'w-full md:hidden'}>
-                                <Img image={LoopholeLabsIconDark} alt="Loophole Labs icon" className={'h-6 w-6 hidden dark:block'} priority/>
-                                <Img image={LoopholeLabsIconLight} alt="Loophole Labs icon" className={'h-6 w-6 dark:hidden'} priority/>
+                                <Img image={LoopholeLabsIconLight} alt="Loophole Labs icon" className={'h-6 w-6'} priority/>
                             </Link>
                             <span className={'md:-mb-1.5 text-[20px] md:text-[18px] font-light text-[#2C0F62] dark:text-white font-mono'}>|</span>
                             <Link href={'https://loopholelabs.io/docs/architect'}>
-                                <p className={'-mb-1 md:-mb-2 md:-ml-0.5 font-semibold md:font-medium text-[16px] md:text-[20px] text-[#2C0F62] dark:text-white'}>Docs</p>
+                                <p className={'-mb-1 md:-mb-2 md:-ml-0.5 font-medium md:font-semibold text-[18px] md:text-[18.5px] text-[#2C0F62] dark:text-white'}>Docs</p>
                             </Link>
                         </div>
                     </div>

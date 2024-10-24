@@ -1,0 +1,14 @@
+{
+  "title": "Polyglot",
+  "root": true,
+  "pages": [
+    "---Reference---",
+    "index",
+    "design-philosophy",
+    "specification",
+    "---Languages---",
+    "languages/golang",
+    "---Additional Resources---",
+    "[Github](https://github.com/loopholelabs/polyglot)"
+  ]
+}

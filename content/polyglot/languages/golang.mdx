@@ -3,10 +3,117 @@ title: Golang
 description: Using Polyglot in Golang
 ---
 
-# Go
-
 ## Installation
 
 ```bash
 go get github.com/loopholelabs/polyglot/v2
+```
+
+## Basic Usage
+
+### Encoding Data
+
+```go
+// Create a new buffer
+p := NewBuffer()
+
+// Create an encoder
+e := Encoder(p)
+
+// Encode values
+e.String("Hello World")
+e.Uint32(42)
+e.Bool(true)
+
+// Get the encoded bytes
+bytes := p.Bytes()
+```
+
+### Decoding Data
+```go
+// Create a decoder from bytes
+d := Decoder(bytes)
+
+// Decode values
+str, err := d.String()
+if err != nil {
+    // Handle error
+}
+
+num, err := d.Uint32()
+if err != nil {
+    // Handle error
+}
+
+b, err := d.Bool()
+if err != nil {
+    // Handle error
+}
+```
+
+## Memory Management
+
+Polyglot's Go implementation includes special features for memory efficiency:
+
+### Buffer Pooling
+
+The Buffer type supports reuse to minimize allocations:
+
+```go
+p := NewBuffer()
+defer p.Reset() // Return buffer to pool
+
+// Use buffer...
+e := Encoder(p)
+e.String("Hello")
+
+// Reset clears the buffer for reuse
+p.Reset()
+
+// Reuse the same buffer
+e.String("World")
+```
+
+### Allocation Optimizations
+Monitor allocations in performance-critical code:
+
+```go title="test.go"
+p := NewBuffer()
+n := testing.AllocsPerRun(100, func() {
+    Encoder(p).String("test")
+    d := Decoder(p.Bytes())
+    val, _ := d.String()
+    p.Reset()
+})
+// Expect minimal allocations
+```
+
+## Working with Collections
+
+### Arrays
+
+```go
+// Encoding arrays
+e := Encoder(p)
+data := []string{"1", "2", "3"}
+
+e.Slice(uint32(len(data)), StringKind)
+for _, v := range data {
+    e.String(v)
+}
+
+// Decoding arrays
+d := Decoder(bytes)
+size, err := d.Slice(StringKind)
+if err != nil {
+    // Handle error
+}
+
+result := make([]string, size)
+for i := range result {
+    result[i], err = d.String()
+    if err != nil {
+        // Handle error
+    }
+}
 ```

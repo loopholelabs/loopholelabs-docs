@@ -45,8 +45,8 @@ function PostHog({children, bootstrap}: {children: ReactNode, bootstrap?: any}) 
     if (process.env.NODE_ENV !== 'development') {
         if (typeof window !== 'undefined') {
             // @ts-ignore
-            posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
-                api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+            posthog.init(process.env.POSTHOG_KEY, {
+                api_host: process.env.POSTHOG_HOST,
                 person_profiles: 'always',
                 capture_pageview: false,
                 capture_pageleave: true,

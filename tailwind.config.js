@@ -50,13 +50,13 @@ const twilightPreset = {
         },
         '.prose': {
             '--tw-prose-body': 'theme(colors.fd-foreground / 85%)',
-            '--tw-prose-headings': 'theme(colors.fd-foreground / 85%)',
+            '--tw-prose-headings': 'theme(colors.fd-foreground / 100%)',
             '--tw-prose-links': 'theme(colors.fd-primary.DEFAULT)',
             '--tw-prose-code': 'theme(colors.fd-primary.DEFAULT)',
         },
         '.prose :where(code):not(:where([class~="not-prose"],[class~="not-prose"] *))': {
             border: 'none',
-            backgroundColor: 'theme(colors.fd-primary.DEFAULT / 10%)',
+            backgroundColor: 'theme(colors.fd-primary.DEFAULT / 30%)',
         },
     },
 };

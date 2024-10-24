@@ -29,3 +29,11 @@ next-env.d.ts
 .idea
 .worker-next
 .wrangler
+.env
+
+# sst
+.sst
+
+
+# open-next
+.open-next

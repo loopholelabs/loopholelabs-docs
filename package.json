@@ -5,8 +5,8 @@
   "scripts": {
     "build": "next build",
     "dev": "next dev",
-    "start": "next start",
-    "postinstall": "fumadocs-mdx"
+    "postinstall": "fumadocs-mdx",
+    "start": "next start"
   },
   "dependencies": {
     "@fortawesome/fontawesome-svg-core": "^6.6.0",
@@ -27,12 +27,16 @@
     "lucide-react": "^0.453.0",
     "next": "^14.2.8",
     "next-themes": "^0.3.0",
+    "posthog-js": "^1.176.0",
+    "posthog-node": "^4.2.1",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "sass": "^1.80.3",
     "shiki": "^1.22.0",
+    "sst": "3.2.49",
     "tailwind-merge": "^2.5.4",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "uuidv7": "^1.0.2"
   },
   "devDependencies": {
     "@types/mdx": "^2.0.13",

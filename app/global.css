@@ -152,3 +152,7 @@ h3.mb-1 {
 button.inline-flex.items-center.rounded-full.border.p-0\.5 {
   @apply p-1.5;
 }
+
+#nd-page > article > p:first-of-type {
+  @apply mb-4;
+}

@@ -5,11 +5,12 @@ import {Inter} from 'next/font/google';
 import localFont from 'next/font/local'
 import {type ReactNode, useMemo} from 'react';
 
-import {Provider} from "@/app/provider";
+import {RootProvider} from "@/app/providers";
 
 import {Footer} from "@/components/Footer/Footer";
 import {NavBar} from "@/components/NavBar/NavBar";
 import {cn} from "@/lib/cn";
+import {PostHogBootstrap} from "@/lib/posthog";
 
 const apercuFont = localFont({
     display: 'swap',
@@ -22,20 +23,21 @@ const interFont = Inter({
     variable: '--font-inter',
 })
 
-export default function Layout({children}: { children: ReactNode }) {
+export default async function Layout({children}: { children: ReactNode }) {
     const compiledClassName = useMemo(() => cn(
         apercuFont.variable,
         interFont.variable,
     ), []);
+    const bootstrapData = await PostHogBootstrap();
     return (
         <html lang="en" className={compiledClassName} suppressHydrationWarning>
         <body>
         <ThemeProvider enableSystem={true} defaultTheme={'system'} attribute={'class'} enableColorScheme={true}>
-            <Provider>
+            <RootProvider posthogBootstrap={bootstrapData}>
                 <NavBar/>
                 {children}
-            </Provider>
-            <Footer/>
+                <Footer/>
+            </RootProvider>
         </ThemeProvider>
         </body>
         </html>

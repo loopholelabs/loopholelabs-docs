@@ -31,6 +31,7 @@ export function useAttributeObserver(elementId: string, attributeName: string, c
 }
 
 export function useScrollPosition(elementId: string): number {
+    const pathname = usePathname();
     const [scrollPosition, setScrollPosition] = useState(0);
     useEffect(() => {
         let updatePosition;
@@ -54,6 +55,6 @@ export function useScrollPosition(elementId: string): number {
                 targetElement.removeEventListener('scroll', updatePosition)
             }
         }
-    }, [elementId])
+    }, [elementId, pathname])
     return scrollPosition
 }

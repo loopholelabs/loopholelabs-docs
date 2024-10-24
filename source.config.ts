@@ -1,5 +1,4 @@
 import {defineConfig, defineCollections, frontmatterSchema, metaSchema} from 'fumadocs-mdx/config';
-import { z } from 'zod';
 
 export const architectDocs = defineCollections({
     type: 'doc',
@@ -22,6 +21,18 @@ export const scaleDocs = defineCollections({
 export const scaleMeta = defineCollections({
     type: 'meta',
     dir: './content/scale',
+    schema: metaSchema,
+});
+
+export const polyglotDocs = defineCollections({
+    type: 'doc',
+    dir: './content/polyglot',
+    schema: frontmatterSchema,
+});
+
+export const polyglotMeta = defineCollections({
+    type: 'meta',
+    dir: './content/polyglot',
     schema: metaSchema,
 });
 

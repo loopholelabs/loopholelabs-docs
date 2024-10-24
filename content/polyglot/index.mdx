@@ -1,0 +1,222 @@
+---
+title: Specification
+description: Polyglot Specification
+---
+
+# Polyglot Specification
+
+## Schema
+
+| **Type** 1 byte | Payload
+0+ bytes | Type 1 byte | Payload
+0+ bytes | … |
+| --- | --- | --- | --- | --- |
+
+Data is encoded into a byte buffer in a repeating pattern of a 1 byte type header followed by a payload.
+
+The length of the payload will vary depending on the type and can be anywhere from 0 to infinite, though polyglot byte buffers have a default size of 512 bytes.
+
+| Identifier | Type |
+| --- | --- |
+| 0x00 | [Nil](https://www.notion.so/Specification-49e0a106f9f447e0b249ca06b4f78e83?pvs=21) |
+| 0x01 | [Array](https://www.notion.so/Specification-49e0a106f9f447e0b249ca06b4f78e83?pvs=21) |
+| 0x02 | [Map](https://www.notion.so/Specification-49e0a106f9f447e0b249ca06b4f78e83?pvs=21) |
+| 0x03 | [Any](https://www.notion.so/Specification-49e0a106f9f447e0b249ca06b4f78e83?pvs=21) |
+| 0x04 | [Bytes](https://www.notion.so/Specification-49e0a106f9f447e0b249ca06b4f78e83?pvs=21) |
+| 0x05 | [String](https://www.notion.so/Specification-49e0a106f9f447e0b249ca06b4f78e83?pvs=21) |
+| 0x06 | [Error](https://www.notion.so/Specification-49e0a106f9f447e0b249ca06b4f78e83?pvs=21) |
+| 0x07 | [Boolean](https://www.notion.so/Specification-49e0a106f9f447e0b249ca06b4f78e83?pvs=21) |
+| 0x08 | [Uint8](https://www.notion.so/Specification-49e0a106f9f447e0b249ca06b4f78e83?pvs=21) |
+| 0x09 | [Uint16](https://www.notion.so/Specification-49e0a106f9f447e0b249ca06b4f78e83?pvs=21) |
+| 0x0a | [Uint32](https://www.notion.so/Specification-49e0a106f9f447e0b249ca06b4f78e83?pvs=21) |
+| 0x0b | [Uint64](https://www.notion.so/Specification-49e0a106f9f447e0b249ca06b4f78e83?pvs=21) |
+| 0x0c | [Int32](https://www.notion.so/Specification-49e0a106f9f447e0b249ca06b4f78e83?pvs=21) |
+| 0x0d | [Int64](https://www.notion.so/Specification-49e0a106f9f447e0b249ca06b4f78e83?pvs=21) |
+| 0x0e | [Float32](https://www.notion.so/Specification-49e0a106f9f447e0b249ca06b4f78e83?pvs=21) |
+| 0x0f | [Float64](https://www.notion.so/Specification-49e0a106f9f447e0b249ca06b4f78e83?pvs=21) |
+
+### Nil
+
+The nil identifier signifies the absence of a value and can be used in place of any other supported non-primitive data type.
+
+Nil consists purely of its identifier and has 0 payload.
+
+### Array
+
+| Value Type | Array Size | Element1 | Element2 | Element3 | Element4 |
+| --- | --- | --- | --- | --- | --- |
+| 0x09 | 0x0a 0x00 0x00 0x00 0x04 | 0x09 0x00 0x01 | 0x09 0x00 0x02 | 0x09 0x00 0x03 | 0x09 0x00 0x04 |
+| Uint16 | 4 | 1 | 2 | 3 | 4 |
+
+The array identifier indicates an ordered collection of elements.
+
+A 1 byte type identifier follows signifying the value of the types being stored by the collection.
+
+This identifier can be the [Any](https://www.notion.so/Specification-49e0a106f9f447e0b249ca06b4f78e83?pvs=21) value, meaning the map values have different types, determined by the type identifier before each individual item.
+
+A Uint32 indicates the size of the collection. This is the number of elements, **not** the size in bytes.
+
+The elements of the collection follows in the same repeating pattern of identifier byte and payload as the top level.
+
+### Map
+
+| Key Type | Value Type | Map Size | Key1 | Value1 | Key2 | Value2 |
+| --- | --- | --- | --- | --- | --- | --- |
+| 0x08 | 0x09 | 0x0a 0x00 0x00 0x00 0x02 | 0x08 0x04 | 0x09 0xFF 0x03 | 0x09 0x00 0x34 | 0x09 0x02 0x11 |
+| Uint8 | Uint16 | 2 | 4 | 3 | 34 | 11 |
+
+The map identifier indicates a collection of key value pairs.
+
+A 1 byte identifier indicates the data type of the key.
+
+A 1 byte identifier indicates the data type of the value.
+
+This identifier can be the [Any](https://www.notion.so/Specification-49e0a106f9f447e0b249ca06b4f78e83?pvs=21) value, meaning the map values have different types, determined by the type identifier before each individual item.
+
+A Uint32 indicates the size of the collection. This is the number of elements, **not** the size in bytes.
+
+The elements of the collection follows a repeating pattern of key, value, key value, etc, prefixed by their type identifiers.
+
+### Any
+
+This map identifier indicates an anonymous or unknown value type.
+
+Can be used as the value type in Array and Map to indicate a collection of multiple differing types.
+
+### Bytes
+
+| Size | Bytes |
+| --- | --- |
+| 0x0a 0x00 0x00 0x00 0x08 | 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 |
+| 8 | 0x01 0x02 0x03 0x04 0x05 0x06 0x07 0x08 |
+
+This identifier indicates a collection of bytes, aka a data buffer, or byte array.
+
+A Uint32 indicates the size in number of bytes.
+
+### String
+
+| Size | String |
+| --- | --- |
+| 0x0a 0x00 0x00 0x00 0x11 | 0x49 0x65 0x6C 0x6C 0x6F 0x20 0x57 0x6F 0x72 0x6C 0x0x64 |
+| 11 | Hello World |
+
+This identifier indicates a text string.
+
+A Uint32 indicates the size in number of bytes.
+
+The text is encoded using [UTF-8](https://en.wikipedia.org/wiki/UTF-8).
+
+### Error
+
+| Size | String |
+| --- | --- |
+| 0x0a 0x00 0x00 0x00 0x04 | 0x4F 0x6F 0x70 0x73 |
+| 4 | Oops |
+
+This identifier indicates an error message.
+
+Errors are encoded as a simple [UTF-8 encoded](https://en.wikipedia.org/wiki/UTF-8) text string and transformed into language appropriate error types on the receiving end.
+
+### Boolean
+
+| Value |
+| --- |
+| 0x01 |
+| true |
+
+This identifier indicates a [boolean](https://en.wikipedia.org/wiki/Boolean_data_type) value.
+
+Booleans are encoded as a single byte with 0x01 value for true, and 0x00 value for false.
+
+### Uint8
+
+| Value |
+| --- |
+| 0x4F |
+| 79 |
+
+This identifier indicates an unsigned 8-bit integer.
+
+Uint8s are encoded as a single byte.
+
+### Uint16
+
+| Value |
+| --- |
+| 0x00 0x01 |
+| 1 |
+
+This identifier indicates an unsigned 16-bit integer.
+
+Uint16s are encoded as a pair of two bytes where the first byte holds the 8 most significant bits, and the second byte holds the last.
+
+### Uint32
+
+| Value |
+| --- |
+| 0x00 0x00 0x00 0x01 |
+| 1 |
+
+This identifier indicates an unsigned 32-bit integer.
+
+Uint32s are encoded as 4 bytes where the first byte holds the 8 most significant bits, then the second holds the next 8, and so on.
+
+### Uint64
+
+| Value |
+| --- |
+| 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x01 |
+| 1 |
+
+This identifier indicates an unsigned 64-bit integer.
+
+Uint64s are encoded as 8 bytes where the first byte holds the 8 most significant bits, then the second hold the next 8, and so on.
+
+### Int32
+
+| Value |
+| --- |
+| 0x00 0x00 0x00 0x01 |
+| 1 |
+
+This identifier indicates a signed 32-bit integer.
+
+Int32s are encoded as 4 bytes where the first byte holds the 8 most significant bits, then the second holds the next 8, and so on.
+
+### Int64
+
+| Value |
+| --- |
+| 0x00 0x00 0x00 0x00 0x00 0x00 0x00 0x01 |
+| 1 |
+
+This identifier indicates a signed 64-bit integer.
+
+Int64s are encoded as 8 bytes where the first byte holds the 8 most significant bits, then the second hold the next 8, and so on.
+
+### Float32
+
+| Value |
+| --- |
+| 0x43 0xFD 0x00 0x00 |
+| 100 |
+
+This identifier indicates a 32-bit single precision floating point number.
+
+Float32’s are encoded according to the [IEEE 754 binary32](https://en.wikipedia.org/wiki/Single-precision_floating-point_format) standard and then split into 8 bytes where the first byte holds the 8 most significant bits, then the second hold the next 8, and so on.
+
+### Float64
+
+| Value |
+| --- |
+| 0x61 0x59 0x00 0x00 0x00 0x00 0x00 0x00 |
+| 100 |
+
+This identifier indicates a 64-bit double precision floating point number.
+
+Float64’s are encoded according to the [IEEE 754 binary64](https://en.wikipedia.org/wiki/Double-precision_floating-point_format) standard and then split into 8 bytes where the first byte holds the 8 most significant bits, then the second hold the next 8, and so on.
+
+## Protobuf
+
+Complex objects / messages are encoded in the order they are outlined in the proto3 file from the top to the bottom, not by field position value. All primitive fields are encoded first, then all arrays (repeated fields), then nested messages.

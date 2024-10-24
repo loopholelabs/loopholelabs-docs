@@ -2020,10 +2020,10 @@ fsevents@~2.3.2:
   resolved "https://registry.npmjs.org/fsevents/-/fsevents-2.3.3.tgz"
   integrity sha512-5xoDfX+fL7faATnagmWPpbFtwh/R77WmMMqqHGS65C3vvB0YHrgF+B1YmZ3441tMj5n63k0212XNoJwzlhffQw==
 
-fumadocs-core@14.0.0:
-  version "14.0.0"
-  resolved "https://registry.yarnpkg.com/fumadocs-core/-/fumadocs-core-14.0.0.tgz#edae134ca4a0dfc99def3de92e26d01694310376"
-  integrity sha512-/PljIIfW0J2BRP+73r2HwDa48pr8F7PrzhbNnTQx9n7ly7sl/ETRJht9d60zdH6/SfqXjigp4dkxT3CNenfo0Q==
+fumadocs-core@14.0.1:
+  version "14.0.1"
+  resolved "https://registry.yarnpkg.com/fumadocs-core/-/fumadocs-core-14.0.1.tgz#dab316b822c143fbb1ecb13c24cc09a65240e8e5"
+  integrity sha512-6f9+lwVpok+qW/PnBrNLo/MsRYRxEG6s7oLACVGDL8xXfqNI/aIZJgjImdl7i3XpAiJaCdCxAWhobGCBPW7uBQ==
   dependencies:
     "@formatjs/intl-localematcher" "^0.5.5"
     "@orama/orama" "^3.0.1"
@@ -2070,10 +2070,10 @@ fumadocs-core@14.0.2:
     react ">= 18"
     react-dom ">= 18"
 
-fumadocs-mdx@10.1.0:
-  version "10.1.0"
-  resolved "https://registry.yarnpkg.com/fumadocs-mdx/-/fumadocs-mdx-10.1.0.tgz#80c68a7aa22bae77d899785985c0cc76b5dc37f1"
-  integrity sha512-EKetIV7z/J/GL6n7AN8krWXADt9nmrvkRHm130eJh3aYbI3BAFOm1+smwzfYAecy4jCCrCDT02EF3mjU5nk2pQ==
+fumadocs-mdx@11.1.0:
+  version "11.1.0"
+  resolved "https://registry.yarnpkg.com/fumadocs-mdx/-/fumadocs-mdx-11.1.0.tgz#130e673d945c83ae1dbda1569ce7ac2034f1639c"
+  integrity sha512-rcJNWbeo0RmJnCV/e0aa2vNldiejm7ns1I85T7oR8TtHq/5ear/6W3gYfPTqRBV7VrJ7ctD8w43Ca7tPnaIKhA==
   dependencies:
     "@mdx-js/mdx" "^3.1.0"
     chokidar "^4.0.1"
@@ -2085,10 +2085,10 @@ fumadocs-mdx@10.1.0:
     micromatch "^4.0.8"
     zod "^3.23.8"
 
-fumadocs-openapi@^5.5.2:
-  version "5.5.2"
-  resolved "https://registry.yarnpkg.com/fumadocs-openapi/-/fumadocs-openapi-5.5.2.tgz#3617cf15393aee4cd70f124bec5f24790dad0a4a"
-  integrity sha512-4ooTHH1tuYKELJgynzksr0Ospl9gdb64OYARY5wIsnH5x5uoT3nyztSoUsvW4puQB2353fTEgitPiEVV5hQCpA==
+fumadocs-openapi@^5.5.3:
+  version "5.5.3"
+  resolved "https://registry.yarnpkg.com/fumadocs-openapi/-/fumadocs-openapi-5.5.3.tgz#e2efe90eb79bdea21dc1bd58e6a3ff069b9b14cd"
+  integrity sha512-sOPzi61oHUuHWUArp/ro2fQ9NtWPCeaXKgMR8ViTKr4aSfVIxG/qSCsqCkKCokfODJ/9pV+TE1+oyFEHTgOLJw==
   dependencies:
     "@apidevtools/json-schema-ref-parser" "^11.7.2"
     "@fumari/json-schema-to-typescript" "^1.1.1"
@@ -2107,10 +2107,10 @@ fumadocs-openapi@^5.5.2:
     remark-rehype "^11.1.1"
     shiki "^1.22.0"
 
-fumadocs-ui@14.0.0:
-  version "14.0.0"
-  resolved "https://registry.yarnpkg.com/fumadocs-ui/-/fumadocs-ui-14.0.0.tgz#a6f649adc15ceaf6041208bac670e9c2c001a831"
-  integrity sha512-0VC4P88QdMJfeJ2P2NZiJN4quH9P+NV714Z3hmHRgP0dY6KYT92sVfue46+sYo9DYCng8QyswKxg+aONqD/G6g==
+fumadocs-ui@14.0.1:
+  version "14.0.1"
+  resolved "https://registry.yarnpkg.com/fumadocs-ui/-/fumadocs-ui-14.0.1.tgz#7b429993b1f86c9ef22287f11a26f0d1a4faafa4"
+  integrity sha512-QzLDuaHxk2+zc8szBQae23sSfAUaaYDpiZoeTBm/2KevoEoqEieQMgJ7SW1RLLDcnsbSwAK0o//ub8j2VT3/KQ==
   dependencies:
     "@radix-ui/react-accordion" "^1.2.1"
     "@radix-ui/react-collapsible" "^1.1.1"
@@ -2119,18 +2119,19 @@ fumadocs-ui@14.0.0:
     "@radix-ui/react-navigation-menu" "^1.2.1"
     "@radix-ui/react-popover" "^1.1.2"
     "@radix-ui/react-scroll-area" "^1.2.0"
+    "@radix-ui/react-slot" "^1.1.0"
     "@radix-ui/react-tabs" "^1.1.1"
     "@tailwindcss/typography" "^0.5.15"
     class-variance-authority "^0.7.0"
     cmdk "^1.0.0"
-    fumadocs-core "14.0.0"
+    fumadocs-core "14.0.1"
     next-themes "^0.3.0"
     react-medium-image-zoom "^5.2.10"
     tailwind-merge "^2.5.4"
   optionalDependencies:
     "@algolia/client-search" "^4.0.0"
     algoliasearch "^4.24.0"
-    tailwindcss "3.4.14"
+    tailwindcss "^3.4.14"
 
 fumadocs-ui@14.0.2:
   version "14.0.2"
@@ -3855,7 +3856,7 @@ tailwindcss-animate@^1.0.7:
   resolved "https://registry.npmjs.org/tailwindcss-animate/-/tailwindcss-animate-1.0.7.tgz"
   integrity sha512-bl6mpH3T7I3UFxuvDEXLxy/VuFxBk5bbzplh7tXI68mwMokNYd1t9qPBHlnyTwfa4JGC4zP516I1hYYtQ/vspA==
 
-tailwindcss@3.4.14, tailwindcss@^3.4.10, tailwindcss@^3.4.14:
+tailwindcss@^3.4.10, tailwindcss@^3.4.14:
   version "3.4.14"
   resolved "https://registry.yarnpkg.com/tailwindcss/-/tailwindcss-3.4.14.tgz#6dd23a7f54ec197b19159e91e3bb1e55e7aa73ac"
   integrity sha512-IcSvOcTRcUtQQ7ILQL5quRDg7Xs93PdJEk1ZLbhhvJc7uj/OAhYOnruEiwnGgBvUtaUAJ8/mhSw1o8L2jCiENA==

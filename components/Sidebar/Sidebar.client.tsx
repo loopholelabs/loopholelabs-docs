@@ -6,15 +6,11 @@ import {MenuIcon, XIcon} from "lucide-react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDiscord, faGithub} from "@fortawesome/free-brands-svg-icons";
 
-import {cn} from "@/lib/utils";
+import {cn} from "@/lib/cn";
 import {buttonVariants} from "@/lib/variants";
 import {useAttributeObserver} from "@/lib/hooks";
 import {Link} from "@/components/Link/Link";
 import {ThemeToggle} from "@/components/ThemeToggle/ThemeToggle";
-import Img from "@/components/Img/Img";
-
-import ArchitectIconLight from "@/public/images/architect-icon-light.svg";
-import ScaleIconLight from "@/public/images/scale-icon-light.svg";
 
 export function SidebarToggle(props: ButtonHTMLAttributes<HTMLButtonElement>): ReactElement {
     const [open, setOpen] = useState(false);

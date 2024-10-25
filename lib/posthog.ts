@@ -7,7 +7,7 @@ import {generateID} from '@/lib/generateID'
 
 export async function PostHogBootstrap() {
     let distinct_id = ''
-    const api_key = process.env.POSTHOG_KEY || '';
+    const api_key = process.env.NEXT_PUBLIC_POSTHOG_KEY || '';
     if(api_key == '') {
         console.warn("PostHog API Key not found");
     }
@@ -21,7 +21,7 @@ export async function PostHogBootstrap() {
     if (!distinct_id) {
         distinct_id = generateID()
     }
-    const client = new PostHog(api_key, {host: process.env.POSTHOG_HOST || 'https://us.i.posthog.com'})
+    const client = new PostHog(api_key, {host: process.env.NEXT_PUBLIC_POSTHOG_HOST || 'https://us.i.posthog.com'})
     const flags = await client.getAllFlags(distinct_id)
     return {
         distinctID: distinct_id,

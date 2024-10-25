@@ -19,8 +19,8 @@ export default $config({
     async run() {
         new sst.aws.Nextjs("loopholelabs-docs", {
             environment: {
-                POSTHOG_KEY,
-                POSTHOG_HOST,
+                NEXT_PUBLIC_POSTHOG_KEY: POSTHOG_KEY,
+                NEXT_PUBLIC_POSTHOG_HOST: POSTHOG_HOST,
             }
         });
     },

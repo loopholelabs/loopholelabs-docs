@@ -53,7 +53,16 @@ export async function generateMetadata(props: {
     if (!page) notFound();
 
     return architectMetadataImage.withImage(page.slugs, {
+        metadataBase: new URL('https://loopholelabs.io/docs'),
         title: page.data.title,
         description: page.data.description,
+        twitter: {
+            card: 'summary_large_image',
+            creator: '@loopholelabs',
+        },
+        openGraph: {
+            url: 'https://loopholelabs.io',
+            siteName: 'Loophole Labs | Docs',
+        },
     });
 }

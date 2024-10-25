@@ -54,7 +54,7 @@ export function NavBar() {
                                 <Img image={LoopholeLabsIconLight} alt="Loophole Labs icon" className={'h-6 w-6'} priority/>
                             </Link>
                             <span className={'md:-mb-1.5 text-[20px] md:text-[18px] font-light text-[#2C0F62] dark:text-white font-mono'}>|</span>
-                            <Link href={'https://loopholelabs.io/docs/architect'}>
+                            <Link href={'https://loopholelabs.io/docs'}>
                                 <p className={'-mb-1 md:-mb-2 md:-ml-0.5 font-medium md:font-semibold text-[18px] md:text-[18.5px] text-[#2C0F62] dark:text-white'}>Docs</p>
                             </Link>
                         </div>

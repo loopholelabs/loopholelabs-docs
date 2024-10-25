@@ -52,15 +52,15 @@ export function Footer() {
                         <div className="flex flex-col font-apercu font-medium">
                             <h3 className="font-medium pb-6 text-primary">Products</h3>
                             <ul className="flex flex-col items-start gap-4 list-none font-normal max-[515px]:items-center">
-                                <FooterLink href="/architect" title="Architect">Architect</FooterLink>
-                                <FooterLink href="/scale" title="Scale">Scale</FooterLink>
+                                <FooterLink href="https://architect.run" title="Architect">Architect</FooterLink>
+                                <FooterLink href="https://scale.sh" title="Scale">Scale</FooterLink>
                             </ul>
                         </div>
 
                         <div className="flex flex-col font-apercu font-medium">
                             <h3 className="font-medium pb-6 text-primary">Resources</h3>
                             <ul className="flex flex-col items-start gap-4 list-none font-normal max-[515px]:items-center">
-                                <FooterLink href="https://loopholelabs.io/docs/architect" title="Docs">Docs</FooterLink>
+                                <FooterLink href="https://loopholelabs.io/docs" title="Docs">Docs</FooterLink>
                                 <FooterLink href="https://loopholelabs.io/blog?product=architect" title="Blog">Blog</FooterLink>
                             </ul>
                         </div>

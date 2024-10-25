@@ -31,6 +31,10 @@ export function RootProvider({children, posthogBootstrap}: { children: ReactNode
                                 name: 'Scale',
                                 value: 'scale',
                             },
+                            {
+                                name: 'Polyglot',
+                                value: 'polyglot',
+                            },
                         ],
                     }
                 }} theme={{enabled: false}}>
@@ -42,20 +46,17 @@ export function RootProvider({children, posthogBootstrap}: { children: ReactNode
 }
 
 function PostHog({children, bootstrap}: {children: ReactNode, bootstrap?: any}) {
-    if (process.env.NODE_ENV !== 'development') {
-        if (typeof window !== 'undefined') {
-            // @ts-ignore
-            posthog.init(process.env.POSTHOG_KEY, {
-                api_host: process.env.POSTHOG_HOST,
-                person_profiles: 'always',
-                capture_pageview: false,
-                capture_pageleave: true,
-                bootstrap: bootstrap,
-            })
-        }
-        return <PostHogProvider client={posthog}>{children}</PostHogProvider>
+    if (typeof window !== 'undefined') {
+        // @ts-ignore
+        posthog.init(process.env.NEXT_PUBLIC_POSTHOG_KEY, {
+            api_host: process.env.NEXT_PUBLIC_POSTHOG_HOST,
+            person_profiles: 'always',
+            capture_pageview: false,
+            capture_pageleave: true,
+            bootstrap: bootstrap,
+        })
     }
-    return <>{children}</>
+    return <PostHogProvider client={posthog}>{children}</PostHogProvider>
 }
 
 function PostHogPageView(): null {

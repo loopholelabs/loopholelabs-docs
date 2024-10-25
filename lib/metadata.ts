@@ -3,6 +3,7 @@ import {architectSource, polyglotSource, scaleSource} from '@/app/source';
 
 export const architectMetadataImage = createMetadataImage({
     imageRoute: '/architect-docs-og',
+
     source: architectSource,
 });
 

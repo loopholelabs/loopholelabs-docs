@@ -3,6 +3,7 @@ import './global.css';
 import {ThemeProvider} from "next-themes";
 import {Inter} from 'next/font/google';
 import localFont from 'next/font/local'
+import type {Metadata} from 'next/types';
 import {type ReactNode, useMemo} from 'react';
 
 import {RootProvider} from "@/app/providers";
@@ -12,20 +13,24 @@ import {NavBar} from "@/components/NavBar/NavBar";
 import {cn} from "@/lib/cn";
 import {PostHogBootstrap} from "@/lib/posthog";
 
-const apercuFont = localFont({
-    display: 'swap',
-    variable: '--font-apercu',
-    src: '../public/fonts/Apercu/ApercuVariableProportional.woff2',
-})
 const interFont = Inter({
     display: 'fallback',
     subsets: ['latin'],
     variable: '--font-inter',
 })
 
+export const metadata: Metadata = {
+    title: 'Loophole Labs | Docs',
+    description: 'Loophole Labs Documentation',
+    applicationName: 'Loophole Labs Documentation',
+    referrer: 'origin-when-cross-origin',
+    keywords: ['Loophole Labs', 'Architect', 'Scale', 'Polyglot', 'Documentation'],
+    metadataBase: new URL('https://loopholelabs.io/docs'),
+    category: 'technology',
+}
+
 export default async function Layout({children}: { children: ReactNode }) {
     const compiledClassName = useMemo(() => cn(
-        apercuFont.variable,
         interFont.variable,
     ), []);
     const bootstrapData = await PostHogBootstrap();

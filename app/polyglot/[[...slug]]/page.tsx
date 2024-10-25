@@ -1,4 +1,3 @@
-import {polyglotSource} from '@/app/source';
 import {
     DocsPage,
     DocsBody,
@@ -7,14 +6,13 @@ import {
 } from 'fumadocs-ui/page';
 import {notFound} from 'next/navigation';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
+import type {ReactElement} from "react";
 
+import {polyglotSource} from '@/app/source';
 import {polyglotMetadataImage} from "@/lib/metadata";
 
-export default async function Page({
-                                       params,
-                                   }: {
-    params: { slug?: string[] };
-}) {
+export default async function Page(props: { params: Promise<{ slug: string[] }>; }): Promise<ReactElement> {
+    const params = await props.params;
     const page = polyglotSource.getPage(params.slug);
     if (!page) notFound();
 

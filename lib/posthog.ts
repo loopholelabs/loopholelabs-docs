@@ -8,11 +8,8 @@ import {generateID} from '@/lib/generateID'
 export async function PostHogBootstrap() {
     let distinct_id = ''
     const api_key = process.env.NEXT_PUBLIC_POSTHOG_KEY || '';
-    if(api_key == '') {
-        console.warn("PostHog API Key not found");
-    }
     const cookieName = `ph_${api_key}_posthog`
-    const cookieStore = cookies()
+    const cookieStore = await cookies();
     const cookie = cookieStore.get(cookieName)
     if (cookie) {
         const phCookieParsed = JSON.parse(cookie.value);

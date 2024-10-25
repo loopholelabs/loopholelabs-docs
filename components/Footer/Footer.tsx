@@ -49,7 +49,7 @@ export function Footer() {
                     </div>
 
                     <div className="flex flex-row gap-20 max-[1168px]:grid max-[1168px]:grid-cols-4 max-[1168px]:gap-12 max-[1021px]:grid-cols-3 max-[1021px]:grid-rows-2 max-[750px]:grid-cols-2 max-[750px]:gap-10 max-[515px]:grid-cols-1 max-[515px]:grid-rows-4 max-[515px]:text-center">
-                        <div className="flex flex-col font-apercu font-medium">
+                        <div className="flex flex-col font-medium">
                             <h3 className="font-medium pb-6 text-primary">Products</h3>
                             <ul className="flex flex-col items-start gap-4 list-none font-normal max-[515px]:items-center">
                                 <FooterLink href="https://architect.run" title="Architect">Architect</FooterLink>
@@ -57,7 +57,7 @@ export function Footer() {
                             </ul>
                         </div>
 
-                        <div className="flex flex-col font-apercu font-medium">
+                        <div className="flex flex-col font-medium">
                             <h3 className="font-medium pb-6 text-primary">Resources</h3>
                             <ul className="flex flex-col items-start gap-4 list-none font-normal max-[515px]:items-center">
                                 <FooterLink href="https://loopholelabs.io/docs" title="Docs">Docs</FooterLink>
@@ -65,7 +65,7 @@ export function Footer() {
                             </ul>
                         </div>
 
-                        <div className="flex flex-col font-apercu font-medium">
+                        <div className="flex flex-col font-medium">
                             <h3 className="font-medium pb-6 text-primary">Company</h3>
                             <ul className="flex flex-col items-start gap-4 list-none font-normal max-[515px]:items-center">
                                 <FooterLink href="https://loopholelabs.io" title="About Us">About Us</FooterLink>
@@ -74,7 +74,7 @@ export function Footer() {
                             </ul>
                         </div>
 
-                        <div className="flex flex-col font-apercu font-medium">
+                        <div className="flex flex-col font-medium">
                             <h3 className="font-medium pb-6 text-primary">Follow Us</h3>
                             <ul className="grid grid-cols-2 gap-4 max-[1168px]:-ml-6 max-[515px]:-ml-3">
                                 <SocialLink href="https://twitter.com/LoopholeLabs" title="Twitter" icon={faTwitter} />

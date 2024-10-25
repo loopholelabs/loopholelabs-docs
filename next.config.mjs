@@ -11,7 +11,7 @@ const config = {
       {
         source: '/',
         destination: '/architect',
-        permanent: true,
+        permanent: false,
       },
     ]
   },

@@ -1,26 +1,27 @@
-# loopholelabs-docs
+# Loophole Labs Docs
 
-This is a Next.js application generated with
-[Create Fumadocs](https://github.com/fuma-nama/fumadocs).
+The source repository for the [Loophole Labs Docs Site](https://loopholelabs.io/docs)
 
-Run development server:
+[![License: Apache 2.0](https://img.shields.io/badge/License-Apache%202.0-brightgreen.svg)](https://www.apache.org/licenses/LICENSE-2.0)
+[![Discord](https://dcbadge.vercel.app/api/server/JYmFhtdPeu?style=flat)](https://loopholelabs.io/discord)
 
-```bash
-npm run dev
-# or
-pnpm dev
-# or
-yarn dev
-```
+## Contributing
 
-Open http://localhost:3000 with your browser to see the result.
+Bug reports and pull requests are welcome on GitHub at [https://github.com/loopholelabs/loopholelabs-docs][gitrepo]. For more contribution information check out [the contribution guide](contributing).
 
-## Learn More
+## License
 
-To learn more about Next.js and Fumadocs, take a look at the following
-resources:
+This project is available as open source under the terms of the [Apache License, Version 2.0](http://www.apache.org/licenses/LICENSE-2.0).
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js
-  features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-- [Fumadocs](https://fumadocs.vercel.app) - learn about Fumadocs
+## Code of Conduct
+
+Everyone interacting in this project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [CNCF Code of Conduct](https://github.com/cncf/foundation/blob/master/code-of-conduct.md).
+
+## Project Managed By:
+
+[![https://loopholelabs.io][loopholelabs]](https://loopholelabs.io)
+
+[gitrepo]: https://github.com/loopholelabs/loopholelabs-docs
+[contributing]: https://github.com/loopholelabs/loopholelabs-docs/blob/main/CONTRIBUTING.md
+[loopholelabs]: https://cdn.loopholelabs.io/loopholelabs/LoopholeLabsLogo.svg
+[loophomepage]: https://loopholelabs.io

@@ -50,7 +50,7 @@ export async function generateMetadata(props: { params: Promise<{ slug?: string[
     if (!page) notFound();
 
     return architectMetadataImage.withImage(page.slugs, {
-        metadataBase: new URL('https://loopholelabs.io/docs'),
+        metadataBase: new URL('https://loopholelabs.io'),
         title: page.data.title,
         description: page.data.description,
         twitter: {
@@ -58,7 +58,7 @@ export async function generateMetadata(props: { params: Promise<{ slug?: string[
             creator: '@loopholelabs',
         },
         openGraph: {
-            url: 'https://loopholelabs.io',
+            url: 'https://loopholelabs.io/docs',
             siteName: 'Architect Docs',
         },
     });

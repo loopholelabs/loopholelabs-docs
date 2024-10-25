@@ -47,9 +47,7 @@ export async function generateStaticParams() {
     return scaleSource.generateParams();
 }
 
-export async function generateMetadata(props: {
-    params: Promise<{ slug?: string[] }>;
-}) {
+export async function generateMetadata(props: { params: Promise<{ slug?: string[] }>; }) {
     const params = await props.params;
     const page = scaleSource.getPage(params.slug);
     if (!page) notFound();
@@ -63,8 +61,8 @@ export async function generateMetadata(props: {
             creator: '@loopholelabs',
         },
         openGraph: {
-            url: 'https://loopholelabs.io',
-            siteName: 'Loophole Labs | Docs',
+            url: 'https://loopholelabs.io/docs',
+            siteName: 'Scale Docs',
         },
     });
 }

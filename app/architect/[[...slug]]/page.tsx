@@ -44,9 +44,7 @@ export async function generateStaticParams() {
     return architectSource.generateParams();
 }
 
-export async function generateMetadata(props: {
-    params: Promise<{ slug?: string[] }>;
-}) {
+export async function generateMetadata(props: { params: Promise<{ slug?: string[] }>; }) {
     const params = await props.params;
     const page = architectSource.getPage(params.slug);
     if (!page) notFound();
@@ -61,7 +59,7 @@ export async function generateMetadata(props: {
         },
         openGraph: {
             url: 'https://loopholelabs.io',
-            siteName: 'Loophole Labs | Docs',
+            siteName: 'Architect Docs',
         },
     });
 }

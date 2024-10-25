@@ -52,11 +52,6 @@ body {
 @media screen and (min-width: 768px) {
   #nd-docs-layout {
     @apply overflow-y-auto;
-  }
-}
-
-@media screen and (min-width: 761px) {
-  #nd-docs-layout {
     @apply h-dvh;
   }
 
@@ -67,11 +62,6 @@ body {
   #nd-docs-layout>div:last-child {
     height: calc(100dvh - 4rem);
   }
-}
-
-#nd-sidebar div > div:nth-last-child(2) {
-  @apply py-3;
-  @apply md:hidden;
 }
 
 #nd-sidebar > div:first-of-type {

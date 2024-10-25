@@ -1,0 +1,101 @@
+---
+title: Overview
+description: Learn how Scale Signatures work and how they're used in Scale Functions.
+---
+
+Signatures are one of the core concepts behind Scale Functions. They allow developers to define the inputs and outputs of their plugins in a type-safe way. This feature is especially useful when working with Golang, as it enables developers to leverage the language's strong typing system.
+
+They are used to define the inputs and outputs of a function using a declarative syntax we call the **Scale Signature DSL**,
+and once they are parsed by our compiler we are able to generated cross-language type safety.
+
+We use the [Polyglot](/polyglot) library under the hood to facilitate efficient
+serialization and deserialization of structured data between host and guest languages and to cross the WASM boundary.
+
+We also publish and support a number of **Official** Scale Signatures for common use cases:
+
+| Signature                      | Description                                                       | Supported Languages              | Available Adapters                                                                                                                                                             | Latest Version |
+|--------------------------------|-------------------------------------------------------------------|----------------------------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|----------------|
+| [HTTP](/scale/signatures/http) | HTTP Signature meant to be used for HTTP handlers and middleware. | Go, Rust, TypeScript, JavaScript | [net/http](/scale/languages/golang/adapters/net-http), [FastHTTP](/scale/languages/golang/adapters/fasthttp), [NextJS](/scale/languages/javascript-typescript/adapters/nextjs) | 0.3.8          |
+
+Official are maintained by the Scale Functions team and come with [Adapters](/scale/languages/golang/adapters/net-http) which
+allow them to be used seamlessly from popular Frameworks and Libraries.
+
+## Getting Started
+
+To start using Scale Signatures in Golang, you'll need to have the Scale framework installed and set up. If you haven't done this yet, please refer to the [Getting Started guide](https://scale.sh/docs/getting-started/overview).
+
+## Defining a Signature
+
+Defining a Scale Signature in Golang involves creating a struct that represents the input and output of your function. Here's the default output of the `scale signature new` command:
+
+```go
+version = "v1alpha"
+context = "context"
+model Context {
+  string MyString {
+    default = "DefaultValue"
+  }
+}
+```
+
+In this example, `Context` is a Scale Signature that defines a struct  with a string and a default string value.
+
+For more information on using this syntax, using [HCL format](/scale/signatures/hcl)
+
+## Using a Signature
+
+Generate the signature, defined in the example above, by again using [the CLI](/scale/cli/reference/signatures):
+
+```
+scale signature generate <name:tag>
+```
+
+This will generate both the `guest` and `host` signatures, each of which are set of functions/interfaces that handle getting the data in, and out, of the associated scale function(s), in a type-safe, and performant manner.
+For more information on why we need bindings for the guest and the host, see the [overview](/scale).
+
+Now, to use a Scale Signature in Golang, using the generated signature above, you can define a function accordingly. Here's an example:
+
+
+```go
+
+import (
+    signature "./path/to/your/scale.signature"
+)
+
+func scale(ctx *signature.Context) (*signature.Context, error) {
+    // Your function implementation goes here
+}
+```
+
+In fact, once you have a scalefile, this can be done for you, with the `scale signature use <name:tag>` command. Once this is done, you can use the types defined in your signature file for input and output of your scale function.
+
+All of the commands for working with signatures are in the [CLI API reference](/scale/cli/reference/signatures).
+
+## Next Steps
+
+Now that you know the basics of Scale Signatures in Golang, you can start integrating them into your Scale plugins/functions. For more info, please refer to the [API Reference](/scale/cli/reference/signatures).
+
+---
+
+## Chaining Functions
+
+Scale Functions are designed to be chained together to form a pipeline of functions that can be executed sequentially.
+
+To allow developers to make decisions about when the next function in the chain should be executed, all signatures provide a
+`Next()` method which runs the next function in the chain.
+
+```go
+//go:build tinygo || js || wasm
+package scale
+
+import (
+    signature "github.com/loopholelabs/scale-signature-http"
+)
+
+func Scale(ctx *signature.Context) (*signature.Context, error) {
+    ctx.Response().SetBody("Hello, World!")
+    return ctx.Next()
+}
+```
+
+If there is no next function in the chain, the `Next()` method will not do anything and will return the same context.

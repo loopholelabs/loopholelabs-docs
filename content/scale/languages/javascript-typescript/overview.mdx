@@ -1,0 +1,123 @@
+---
+title: Overview
+description: An overview of Javascript and Typescript support in Scale Functions
+---
+
+Scale Functions currently support using [TypeScript](https://www.typescriptlang.org/) and
+[JavaScript](https://developer.mozilla.org/en-US/docs/Web/JavaScript) as the [Host](#host-support) language and as the [Guest](#guest-support).
+
+This means that you can run Functions written in any supported language inside a TypeScript or JavaScript application ([Host Support](#host-support)) _as well as_ **write** functions in JS/TS and run them in other host languages, like [Golang](/languages/golang/overview).
+
+## Guest Support
+
+A Scale Function written in [TypeScript](https://www.typescriptlang.org) often looks something like this:
+
+```ts
+import * as signature from "signature";
+
+export function scale(ctx?: signature.Context): signature.Context | undefined {
+    return signature.Next(ctx);
+}
+```
+
+The above example is a simple HTTP Function that responds with "Hello, World!" to any request.
+
+By default, the generated function will be configured to use the `HTTP Signature`,
+which provides an interface for handling HTTP requests and responses. To learn more about the `HTTP Signature` and the
+interfaces it provides, you can check out the [HTTP Signature Reference](/scale/signatures/http). Learn more about Signatures in the [Signatures Overview](/scale/signatures/overview).
+
+## Host Support
+
+To use a compiled Scale Function (written in any supported language) inside a TypeScript or JavaScript application, there are 3 steps:
+1. Import the Scale Function(s) into the TS/JS application by embedding them
+2. Create a new Scale Runtime and pass in the Scale Function(s)
+3. Call the `Run` method on the Scale Runtime with your request
+
+### Importing Scale Functions
+
+Scale Functions can be imported into a TS/JS application:
+- [Embedding](#embedding-scale-functions)
+
+#### Embedding Scale Functions
+
+Use the `@loopholelabs/scale` package directly to embed functions.
+
+```js
+import { New, Config } from "@loopholelabs/scale";
+import { Read } from "@loopholelabs/scale/scalefunc/index.js";
+
+const sf = Read("<path to exported function>");
+```
+
+### Creating a Scale Runtime
+
+Once you've imported your Scale Function(s) into your TS/JS application, you can create a new instance of the Scale Runtime, passing the function, as well as a new `Config`, with a `NewSiginature`.
+
+
+```javascript
+const config = new Config(NewSignature);
+config.WithFunction(sf)
+
+const r = New(config);
+```
+
+### Running a Scale Function
+
+Once you've created the Scale Runtime, you can call the `Instance` method on it to get a new runtime instance.
+The `Context` method of the `Instance` can then be used to set the request body, and the `Run` method can be used to
+run the Scale Function (or Functions).
+
+```js
+const i = r.Instance(null);
+```
+
+<Callout type={"warn"}>
+    You'll notice that we're passing in `null` to the `r.Instance` method above. This is because it's possible to chain
+    native functions alongside Scale Functions, and the `Instance` method will automatically pass the result of the
+    previous function to the next one (and pass the responses back up through the chain).
+
+    If you're not using a native handler at the end of the chain, you can pass in `null` to the `Instance` method.
+</Callout>
+
+It's important to note that an `Instance` can be reused multiple times, but it's not thread-safe. If you need to run
+multiple instances of a Scale Function concurrently, you'll need to create a new `Instance` for each one.
+
+Instances are heavily optimized and will recycle themselves automatically when they're no longer in use. This means that
+creating instances are very cheap and you can create as many as you need as often as you need.
+
+<Callout>
+    The `Instance` method itself **is** thread-safe and can be called concurrently.
+</Callout>
+
+### Putting it all Together
+
+Here's a complete example of a TS/JS application that imports a Scale Function, creates a new Scale Runtime, and runs
+it.
+
+<Tabs items={['Embedding the Function']}>
+    <Tab value="Embedding the Function">
+        ```js
+        import { New, Config } from "@loopholelabs/scale";
+        import { Read } from "@loopholelabs/scale/scalefunc/index.js";
+        import sig from 'signature';
+        const { New: NewSignature, Signature } = sig;
+
+        (async () => {
+            const sf = Read("local-test-1.scale");
+            const config = new Config(NewSignature);
+            config.WithFunction(sf)
+
+            const r = await New(config);
+            const i = await r.Instance(null);
+            const sign = NewSignature();
+
+            await i.Run(sign);
+        })();
+        ```
+    </Tab>
+</Tabs>
+
+## What's Next?
+
+Now that you've learned how to use Scale Functions inside your TS/JS application, you should check out our pre-made
+adapters for popular frameworks and libraries, such as [NextJS](/scale/languages/javascript-typescript/adapters/nextjs).

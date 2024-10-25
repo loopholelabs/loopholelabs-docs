@@ -1,0 +1,510 @@
+---
+title: Quick Start
+description: Create, run, and publish your first Scale Function in minutes.
+---
+
+In this section we’ll be going over how you can quickly get started with Scale to create, run and even publish your own function.
+
+We’ll be building a simple `Hello World` function using the [HTTP Signature](/scale/signatures/http) that will return a simple greeting.
+
+## Install the Scale CLI
+
+The Scale CLI is the primary tool for interacting with Scale Functions and the Scale Registry. It can be easily installed using the following command:
+
+```bash
+curl -fsSL https://dl.scale.sh | sh
+```
+
+<Callout>
+    The CLI attempts to install itself to `/usr/local/bin` by default, but you can also specify a different directory by setting the `INSTALL` environment variable like so:
+
+    ```bash
+    curl -fsSL https://dl.scale.sh | INSTALL=./ sh
+    ```
+</Callout>
+
+To verify that the CLI was installed correctly, check the scale cli version by running the following command:
+
+```bash
+scale version
+```
+
+
+For alternative installation methods or to build the CLI from source, please see the [CLI Installation Guide](/scale/cli/reference/installation).
+
+## Install the Toolchain for your Guest Language
+
+Scale Functions currently support using [Golang](https://go.dev), [TypeScript/JavaScript](https://www.typescriptlang.org/), and [Rust](https://www.rust-lang.org) as the
+Guest Languages, but compiling them requires the appropriate toolchain to be installed on your machine.
+
+If you already have the toolchain for your Guest Language installed, you can skip this step. Otherwise, you can follow
+the guides for your Guest Language below to install the toolchain.
+
+<Tabs items={['Golang', 'Typescript/JavaScript', 'Rust']}>
+    <Tab value="Golang">
+        <h3>Installing the Golang Toolchain</h3>
+
+        To use [Golang](https://go.dev) as the Guest Language, you'll need to install the following:
+        - The [Go](https://go.dev/doc/install) toolchain
+        - The [TinyGo](https://tinygo.org/getting-started/) compiler
+
+        The best way to install [Go](https://go.dev/doc/install) is to follow the official instructions for your
+        operating system and platform at [https://go.dev/doc/install](https://go.dev/doc/install).
+
+        You can verify that Go was installed correctly by running the following command:
+
+        ```bash
+        go version
+        ```
+
+        <Callout>
+            The minimum supported version of Go for use with Scale Functions is `1.18`.
+        </Callout>
+
+
+        The best way to install [TinyGo](https://tinygo.org/getting-started/) is to follow the official
+        instructions for your operating system and platform at
+        [https://tinygo.org/getting-started/install/](https://tinygo.org/getting-started/install).
+
+        You can verify that TinyGo was installed correctly by running the following command:
+
+        ```bash
+        tinygo version
+        ```
+
+        <Callout>
+            The minimum supported version of TinyGo for use with Scale Functions is `0.27.0`.
+        </Callout>
+    </Tab>
+    <Tab value="TypeScript/JavaScript">
+        <h3>Installing JavaScript/TypeScript Tooling</h3>
+
+        To develop with JavaScript (JS) or TypeScript (TS) for the Scale Functions, ensure you have the following installed:
+        - [Node.js](https://nodejs.org/en/) and npm (Node Package Manager), which typically come together.
+        - The TypeScript compiler for TS development.
+
+        The recommended approach to install Node.js and npm is to download the LTS (Long-Term Support) version from the official Node.js website at [https://nodejs.org/en/](https://nodejs.org/en/). This version provides both stability and extended support.
+
+        After installing, you can verify the installation of Node.js and npm by running the following commands in your terminal:
+
+        ```bash
+        node --version
+        npm --version
+        ```
+
+        For TypeScript development, once Node.js and npm are installed, you can install the TypeScript compiler locally in your project or globally on your machine. Local installation is preferred for most projects to ensure consistency across environments and developers. To install TypeScript locally in your project, follow these steps:
+
+        Navigate to your project directory. If you don't have one, create it with:
+
+        ```bash
+        mkdir my-project
+        cd my-project
+        ```
+        Initialize a new npm project if you haven't already:
+
+        ```bash
+        npm init -y
+        ```
+
+        Install TypeScript as a development dependency:
+
+        ```bash
+        npm install typescript --save-dev
+        ```
+        You can verify that TypeScript was installed correctly by running:
+
+        ```bash
+        npx tsc --version
+        ```
+    </Tab>
+    <Tab value="Rust">
+        <h3>Installing the Rust Toolchain</h3>
+
+        To use [Rust](https://www.rust-lang.org) as the Guest Language, you'll need to install the following:
+        - The [Rust](https://www.rust-lang.org/tools/install) toolchain
+        - The [Cargo](https://doc.rust-lang.org/cargo/getting-started/installation.html) package manager
+        - The [wasm32-unknown-unknown](https://doc.rust-lang.org/cargo/reference/specifying-dependencies.html#platform-specific-dependencies) build target
+
+        The best way to install [Rust](https://www.rust-lang.org/tools/install) is to follow the official instructions for
+        your operating system and platform at [https://www.rust-lang.org/tools/install](https://www.rust-lang.org/tools/install).
+
+        In general, you'll want to install the `rustup` tool, which will allow you to easily install and manage multiple
+        versions of Rust on your machine. This can be done by running the following command:
+
+        ```bash
+        curl --proto '=https' --tlsv1.2 -sSf https://sh.rustup.rs | sh
+        ```
+
+        You can verify that Rust was installed correctly by running the following command:
+
+        ```bash
+        rustc --version
+        ```
+
+        <Callout>
+            The minimum supported version of Rust for use with Scale Functions is `1.67.0`.
+        </Callout>
+
+        You can verify that Cargo was installed correctly by running the following command:
+
+        ```bash
+        cargo --version
+        ```
+
+        <Callout>
+            The minimum supported version of Cargo for use with Scale Functions is `1.67.0`.
+        </Callout>
+
+        Next, you'll need to install the `wasm32-unknown-unknown` build target. This can be done by running the following
+        command:
+
+        ```bash
+        rustup target add wasm32-unknown-unknown
+        ```
+
+        You can verify that the build target was installed correctly by running the following command and verifying that
+        `wasm32-unknown-unknown` is listed in the output:
+
+        ```bash
+        rustup target list --installed
+        ```
+    </Tab>
+</Tabs>
+
+## Create a New Function
+
+Once you have the Scale CLI and the toolchain for your Guest Language installed, you can create a new function by
+running the following command, passing a `<name>:<tag>` pair to the `new` command:
+
+```bash
+scale fn new hello:1.0
+```
+
+This will create a new scale function in the current directory. You can also specify a different directory by passing the
+`--directory` or `-d` flag:
+
+```bash
+scale fn new hello:1.0 -d /path/to/directory
+```
+
+<Callout type={"warn"}>
+    By default, the CLI will create a new function using Golang as the Guest Language. If you want to use Rust instead,
+    you can pass the `--language` or `-l` flag:
+
+    ```bash
+    scale fn new hello:1.0 -l rust
+    ```
+</Callout>
+
+The following files will be created in the directory depending on the language you chose:
+
+<Tabs items={['Golang', 'TypeScript/JavaScript', 'Rust']}>
+    <Tab value="Golang">
+        ```yaml scalefile
+          version  = "v1alpha"
+          name     = "hello"
+          tag      = "1.0"
+          language = "go"
+
+          signature {
+            organization = "local"
+            name         = "hello-signature"
+            tag          = "1.0"
+          }
+
+          stateless   = false
+          function    = "scale"
+          initialize  = ""
+          description = ""
+        ```
+
+        ```go scale.go
+        //go:build tinygo || js || wasm
+        package scale
+
+        import (
+            signature "github.com/loopholelabs/scale-signature-http"
+        )
+
+        func Scale(ctx *signature.Context) (*signature.Context, error) {
+            ctx.Response().SetBody("Hello, World!")
+            return ctx.Next()
+        }
+        ```
+
+        ```go-module go.mod
+        module scale
+
+        go 1.18
+
+        require github.com/loopholelabs/scale-signature v0.2.9
+        require github.com/loopholelabs/scale-signature-http v0.3.4
+        ```
+
+        The `scalefile` is the main configuration file for the function. It contains all of the metadata and configuration required
+        to build and run the function. The `scale.go` file contains the actual implementation of the function, and
+        the `go.mod` file is primarily used to provide [Intellisense](https://code.visualstudio.com/docs/editor/intellisense)
+        and Auto-Completion support in your IDE.
+    </Tab>
+    <Tab value="TypeScript/JavaScript">
+        ```yaml scalefile
+          version  = "v1alpha"
+          name     = "hello"
+          tag      = "1.0"
+          language = "ts"
+
+          signature {
+            organization = "local"
+            name         = "hello-signature"
+            tag          = "1.0"
+          }
+
+          stateless   = false
+          function    = "scale"
+          initialize  = ""
+          description = ""
+
+        ```
+
+        ```js index.ts
+
+          import * as signature from "signature";
+
+          export function scale(ctx?: signature.Context): signature.Context | undefined {
+              return signature.Next(ctx);
+          }
+
+        ```
+
+        ```json package.json
+
+          {
+            "name": "hello",
+            "version": "0.1.0",
+            "main": "index.ts",
+            "dependencies": {
+              "signature": "/path/to/generated/signature"
+              }
+          }
+
+        ```
+    </Tab>
+    <Tab value="Rust">
+        ```yaml scalefile
+          version  = "v1alpha"
+          name     = "hello"
+          tag      = "1.1"
+          language = "rust"
+
+          signature {
+            organization = "local"
+            name         = "hello-signature"
+            tag          = "1.1"
+          }
+
+          stateless   = false
+          function    = "scale"
+          initialize  = ""
+          description = ""
+        ```
+
+        ```rust scale.rs
+        use scale_signature_http::context::Context;
+
+        pub fn scale(ctx: &mut Context) -> Result<&mut Context, Box<dyn std::error::Error>> {
+            ctx.response().set_body("Hello, World!".to_string());
+            ctx.next()
+        }
+        ```
+
+        ```toml Cargo.toml
+        [package]
+        name = "scale"
+        version = "0.1.0"
+        edition = "2021"
+
+        [dependencies]
+        scale_signature_http = "0.3.4"
+        scale_signature = "0.2.9"
+
+        [lib]
+        crate-type = ["cdylib"]
+        path = "scale.rs"
+        ```
+
+        The `scalefile` is the main configuration file for the function. It contains all of the metadata and configuration required
+        to build and run the function. The `scale.rs` file contains the actual implementation of the function, and
+        the `Cargo.toml` file is primarily used to provide [Intellisense](https://code.visualstudio.com/docs/editor/intellisense)
+        and Auto-Completion support in your IDE.
+    </Tab>
+</Tabs>
+
+You'll notice that at the end of the Scale Function we call the `Next()` function. This is because Scale Functions can be
+chained together to form a pipeline. The `Next()` function is used to pass the context to the next function in the chain
+and can be conditionally called based on the logic in your function.
+
+This allows for powerful composability that's completely language agnostic. For example, you can use a rust function to validate the request, a golang function to process the
+request, and a third rust function to generate the response!
+
+If you call the `Next()` field and there is no next function in the chain, the function is a no-op and the context is returned.
+
+<Callout>
+    When adding new dependencies to your function, you'll need to add references to them in the `scalefile` to make sure
+    your function can be built properly.
+</Callout>
+
+By default, the generated function will be configured to use the `HTTP Signature`,
+which provides an interface for handling HTTP requests and responses. To learn more about the `HTTP Signature` and the
+interfaces it provides, you can check out the [HTTP Signature Reference](/scale/signatures/http).
+
+<Callout type={"warn"}>
+    The concept of a `Signature` is central to how Scale Functions provide cross-language type safety and it's documented
+    in more detail in the [Signatures](/signatures/overview) section of the documentation.
+</Callout>
+
+## Build the Function
+
+Once you've created a new function, you can build it by running the following command:
+
+```bash
+scale function build
+```
+
+This will build the function and save it to the `Cache Directory` (which defaults to `~/.config/scale/functions` on Linux and macOS).
+You can also specify a different directory by passing the `--cache-directory` flag:
+
+```bash
+scale function build --cache-directory /path/to/directory
+```
+
+<Callout>
+    The `Cache Directory` is where the Scale CLI stores all of the built functions. This is where the CLI will look for
+    functions when you run commands like `scale fn run` or `scale fn push`.
+</Callout>
+
+To list all of the functions that are currently in the `Cache Directory`, you can run the following command:
+
+```bash
+scale function list
+```
+
+```
+  NAME (1)            TAG      ORG           LANGUAGE   SIGNATURE     HASH                                                               VERSION
+ ------------------- -------- ------------- ---------- ------------- ------------------------------------------------------------------ ---------
+  hello              1.0     local         rust       http@v0.3.4   8dad03b701cd124b55ff5caf7a36a9af5d19759fc73a9e8299bea4816f929777   v1alpha
+```
+
+## Run the Function
+
+Once you've built the function, you can run it by running the following command:
+
+```bash
+scale fn run local/hello:1.0
+```
+
+This will start a local HTTP server on port `8080` and will run the function whenever you make a request to it. You can
+also specify a different port by passing the `--listen` or `-l` flag:
+
+```bash
+scale fn run local/hello:1.0 -l :3000
+```
+
+<Callout type={"warn"}>
+    The `scale fn run` command is designed for use with the [HTTP Signature](/scale/signatures/http). It can be used for both
+    local development and production deployments and makes it easy to test your function without having to deploy it.
+</Callout>
+
+## Push the Function
+
+Now that you've built and tested your function, you can push it to the Scale Registry. Once pushed, the function can be
+pulled and used in your existing Typescript or Golang services, or even by other users for their own applications.
+
+<Callout type={"warn"}>
+    Using the Scale Registry is completely free during our beta period. To learn more about our future plans for the Scale Registry,
+    please join the `#scale` channel on our [Discord](https://loopholelabs.io/discord).
+</Callout>
+
+To use the Scale Registry, you'll first have to authenticate with the Scale API. This process is the same for both new
+and existing users.
+
+<Callout>
+    If you are a new user you can still follow along with this guide. Your account will be created automatically when
+    you first sign in.
+</Callout>
+
+To authenticate with the Scale API, you can run the following command:
+
+```bash
+scale auth login
+```
+
+This will open a browser window and prompt you to log in to your Scale account. Once you've logged in, you can
+close the browser window and return to the terminal. You should now be able to push your function to the Scale Registry.
+
+To check that you're authenticated, you can run the following command:
+
+```bash
+scale auth status
+```
+
+```
+  MEMBER ORGS   OWNED ORGS      EMAIL                         ORG
+ ------------- --------------- ----------------------------- -------------
+  []            [shivanshvij]   shivanshvij@loopholelabs.io   shivanshvij
+```
+
+<Callout type={"warn"}>
+    It's also possible to authenticate with the Scale API using an API Key. To learn more about API Keys, you can check
+    out the [API Keys](/scale/cli/reference/apikey) section of the documentation.
+</Callout>
+
+Once you've authenticated with the Scale API, you can push your function to the Scale Registry by running the following command:
+
+```bash
+scale function push hello:1.0
+```
+
+This will push the function to the Scale Registry and make it available for use in your existing services.
+
+<Callout type={"warn"}>
+    The Scale Registry is currently in beta and may be subject to changes in the future. To learn more about the
+    Scale Registry, join the `#scale` channel in [our Discord](https://loopholelabs.com/discord).
+</Callout>
+
+## Pulling a Function
+
+Once you've pushed a function to the Scale Registry, you can pull it and use it in your existing services. To pull a function,
+you can run the following command:
+
+```bash
+scale function pull <your organization>/hello:1.0
+```
+
+<Callout type={"warn"}>
+    When you [pushed the function](#push-the-function) to the Scale Registry, it was pushed to a specific organization.
+    You can find the name of the organization by running the `scale auth status` command.
+
+    If you pushed the function using the `--public` flag, you can pull it without being authenticated with the Scale API.
+</Callout>
+
+This will pull the function from the Scale Registry and save it to the `Cache Directory` (which defaults to `~/.config/scale/functions` on Linux and macOS).
+You can also specify a different directory by passing the `--cache-directory` flag:
+
+```bash
+scale function pull <your organization>/hello:1.0 --cache-directory /path/to/directory
+```
+
+<Callout type={"warn"}>
+    The `scale pull` command only pulls the contents of the scale function from the registry if it's not already present.
+    If the function is already present, it will not be overwritten unless the `--force` flag is passed.
+</Callout>
+
+## Next Steps
+
+Now that you've created and pushed your first function, you can check out the
+[Importing Scale Functions](/scale/languages/golang/overview#importing-scale-functions) guide for [Golang](/scale/languages/golang/overview#importing-scale-functions) and
+[Typescript/Javascript](/scale/languages/javascript-typescript/overview#importing-scale-functions) to learn how to use your function inside your existing services (and
+to chain them alongside native functions).
+
+You can also check out our [Adapter Guides](/scale/languages/golang/adapters/net-http) to learn how to integrate your functions
+with popular frameworks such as [Next.js](/scale/languages/javascript-typescript/adapters/nextjs).

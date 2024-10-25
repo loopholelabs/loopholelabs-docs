@@ -1,0 +1,27 @@
+{
+  "title": "Polyglot",
+  "root": true,
+  "pages": [
+    "---Getting Started---",
+    "index",
+    "getting-started/quick-start",
+    "getting-started/run",
+    "getting-started/write",
+    "---Languages---",
+    "languages/golang",
+    "languages/javascript-typescript",
+    "languages/rust",
+    "---CLI---",
+    "cli/installation",
+    "cli/reference",
+    "---Signatures---",
+    "signatures/overview",
+    "signatures/hcl",
+    "signatures/http",
+    "---Extensions---",
+    "extensions/overview",
+    "extensions/hcl",
+    "---Additional Resources---",
+    "[Github](https://github.com/loopholelabs/scale)"
+  ]
+}

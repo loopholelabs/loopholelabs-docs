@@ -13,6 +13,17 @@ const CustomSearchDialog = dynamic(() => import('@/components/Search/Search'));
 
 export function RootProvider({children, posthogBootstrap}: { children: ReactNode, posthogBootstrap?: any }) {
     const [searchOpen, setSearchOpen] = useState(false);
+    const path = usePathname();
+    let defaultTag = '';
+    if (path.startsWith('/polyglot')) {
+        defaultTag = 'polyglot';
+    }
+    if (path.startsWith("/scale")) {
+        defaultTag = 'scale';
+    }
+    if (path.startsWith('/architect')) {
+        defaultTag = 'architect';
+    }
     return (
         <PostHog bootstrap={posthogBootstrap}>
             <PostHogPageView/>
@@ -21,7 +32,7 @@ export function RootProvider({children, posthogBootstrap}: { children: ReactNode
                 <Root search={{
                     SearchDialog: CustomSearchDialog, options: {
                         api: '/docs/api/search',
-                        defaultTag: 'architect',
+                        defaultTag: defaultTag,
                         tags: [
                             {
                                 name: 'Architect',

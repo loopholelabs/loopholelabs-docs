@@ -1,13 +1,53 @@
 ---
-title: Hello World
-description: Your first document
+title: Overview
+description: "What is Scale?"
 ---
+import {TimerIcon, TerminalSquareIcon, CloudIcon, PlugIcon} from "lucide-react";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faDiscord} from "@fortawesome/free-brands-svg-icons";
 
-Welcome to the docs! You can start writing documents in `/content/docs`.
+[Scale](https://github.com/loopholelabs/scale) is a high-performance, language-agnostic function runtime powered by [WebAssembly](https://webassembly.org) that enables developers to
+easily compose and chain together functions in different languages, resulting in middleware-like functionality.
 
-## What is Next?
+With support for guest languages such as **Golang, TypeScript, and Rust**, and host languages like **Golang and Typescript**, Scale Functions offer a
+flexible solution for composable software development.
+
+![Header Image](/images/scale-header.png)
 
 <Cards>
-  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
-  <Card title="Learn more about Fumadocs" href="https://fumadocs.vercel.app" />
+    <Card
+        title="Getting Started"
+        icon={<TimerIcon />}
+        href="/scale/getting-started/quick-start"
+    >
+        Quickly get up and running with Scale Functions by following our getting started guide.
+    </Card>
+    <Card
+        title="CLI"
+        icon={<TerminalSquareIcon/>}
+        href="/scale/cli/installation"
+    >
+        Install the Scale CLI to create, build, and run your Scale Functions.
+    </Card>
+    <Card
+        title="Registry"
+        icon={<CloudIcon />}
+        href="/scale/registry/overview">
+        Learn how to publish and distribute Scale Functions using the Scale Registry.
+    </Card>
+    <Card
+        title="Integrations"
+        icon={<PlugIcon/>}
+        href="/scale/languages/javascript-typescript/adapters/nextjs"
+    >
+        Explore the various integrations available such as Next.js, Express, and more.
+    </Card>
 </Cards>
+<br/>
+<Card
+    title="Join Our Discord"
+    icon={<FontAwesomeIcon icon={faDiscord} className="w-5 h-5"/>}
+    href="https://loopholelabs.io/discord" external>
+    The `#scale` Channel in our Discord server is a great place to get help
+    with all things Scale.
+</Card>

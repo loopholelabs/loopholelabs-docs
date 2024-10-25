@@ -6,6 +6,7 @@ import {
 } from 'fumadocs-ui/page';
 import {notFound} from 'next/navigation';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
+import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import type {ReactElement} from "react";
 
 import {scaleSource, scaleOpenAPI} from '@/app/source';
@@ -36,6 +37,8 @@ export default async function Page(props: { params: Promise<{ slug: string[] }>;
             <DocsBody>
                 <MDX components={{
                     ...defaultMdxComponents,
+                    Tab,
+                    Tabs,
                     APIPage: scaleOpenAPI.APIPage,
                 }}/>
             </DocsBody>

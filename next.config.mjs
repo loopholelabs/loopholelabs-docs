@@ -10,9 +10,29 @@ const config = {
     return [
       {
         source: '/',
-        destination: '/architect',
+        destination: '/scale',
         permanent: false,
       },
+      {
+        source: '/scale/cli/reference',
+        destination: '/scale/cli/reference/flags',
+        permanent: false,
+      },
+      {
+        source: '/scale/cli',
+        destination: '/scale/cli/installation',
+        permanent: false,
+      },
+      {
+        source: '/scale/signatures',
+        destination: '/scale/signatures/overview',
+        permanent: false,
+      },
+      {
+        source: '/scale/extensions',
+        destination: '/scale/extensions/overview',
+        permanent: false,
+      }
     ]
   },
 };

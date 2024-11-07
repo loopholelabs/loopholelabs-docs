@@ -11,6 +11,8 @@ import {type ReactElement} from "react";
 import {architectSource} from '@/app/source';
 import {architectMetadataImage} from '@/lib/metadata';
 
+export const dynamic = 'force-static';
+
 export default async function Page(props: { params: Promise<{ slug: string[] }>; }): Promise<ReactElement> {
     const params = await props.params;
     const page = architectSource.getPage(params.slug);

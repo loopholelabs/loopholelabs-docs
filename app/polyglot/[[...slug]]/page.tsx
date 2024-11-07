@@ -11,6 +11,8 @@ import type {ReactElement} from "react";
 import {polyglotSource} from '@/app/source';
 import {polyglotMetadataImage} from "@/lib/metadata";
 
+export const dynamic = 'force-static';
+
 export default async function Page(props: { params: Promise<{ slug: string[] }>; }): Promise<ReactElement> {
     const params = await props.params;
     const page = polyglotSource.getPage(params.slug);

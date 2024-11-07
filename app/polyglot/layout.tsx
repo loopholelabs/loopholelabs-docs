@@ -5,6 +5,8 @@ import {polyglotSource} from '@/app/source';
 import {SidebarOptions} from "@/components/Sidebar/Sidebar";
 import type {Metadata} from "next/types";
 
+export const dynamic = 'force-static';
+
 export const metadata: Metadata = {
     title: {
         template: '%s | Polyglot Docs',

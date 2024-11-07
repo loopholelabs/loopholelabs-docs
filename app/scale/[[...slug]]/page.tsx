@@ -12,6 +12,8 @@ import type {ReactElement} from "react";
 import {scaleSource, scaleOpenAPI} from '@/app/source';
 import {scaleMetadataImage} from "@/lib/metadata";
 
+export const dynamic = 'force-static';
+
 export default async function Page(props: { params: Promise<{ slug: string[] }>; }): Promise<ReactElement> {
     const params = await props.params;
     const page = scaleSource.getPage(params.slug);

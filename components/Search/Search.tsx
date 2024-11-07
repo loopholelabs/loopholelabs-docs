@@ -3,10 +3,12 @@
 import {useDocsSearch} from 'fumadocs-core/search/client';
 import {type ReactNode, type ReactElement, type ButtonHTMLAttributes, useEffect, useState, useContext} from 'react';
 import {useOnChange} from 'fumadocs-core/utils/use-on-change';
-import {SearchDialog, type SharedProps, type TagItem, TagsList,} from 'fumadocs-ui/components/dialog/search';
+import {SearchDialog, type SharedProps} from 'fumadocs-ui/components/dialog/search';
 import {SearchIcon} from "lucide-react";
 import {cn} from '@/lib/cn';
 import {buttonVariants} from '@/lib/variants';
+
+import { type TagItem, TagsList} from '@/components/Search/TagList';
 
 import {SearchContext} from "@/context/search";
 

@@ -58,7 +58,7 @@ export async function generateMetadata(props: { params: Promise<{ slug?: string[
     if (!page) notFound();
 
     return scaleMetadataImage.withImage(page.slugs, {
-        metadataBase: new URL('https://loopholelabs.io'),
+        metadataBase: new URL('https://loopholelabs.io/docs'),
         title: page.data.title,
         description: page.data.description,
         twitter: {

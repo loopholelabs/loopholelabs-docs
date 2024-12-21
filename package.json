@@ -3,10 +3,10 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build:worker": "opennextjs-cloudflare",
+    "build:worker": "opennextjs-cloudflare && yarn worker:remove-prettier",
     "dev:worker": "wrangler dev --port 8771",
-    "preview:worker": "yarn build:worker && yarn worker:remove-prettier && yarn dev:worker",
-    "deploy:worker": "yarn build:worker && yarn worker:remove-prettier && wrangler deploy",
+    "preview:worker": "yarn build:worker && yarn dev:worker",
+    "deploy:worker": "yarn build:worker && wrangler deploy",
     "worker:remove-prettier": "npx replace '[a-zA-Z]\\.exports=import\\(\"prettier\"\\)' '' . -r",
     "build": "next build",
     "dev": "next dev",

@@ -5,7 +5,6 @@ const basePath = process.env.NODE_ENV === 'development' ? '/docs' : '';
 
 export const architectMetadataImage = createMetadataImage({
     imageRoute: `${basePath}/architect-og`,
-
     source: architectSource,
 });
 

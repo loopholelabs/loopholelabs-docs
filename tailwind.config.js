@@ -61,19 +61,22 @@ const twilightPreset = {
     },
 };
 
-
 /** @type {import('tailwindcss').Config} */
 export default {
   darkMode: ['class'],
-  content: [
-    './node_modules/fumadocs-ui/dist/**/*.js',
-    './node_modules/fumadocs-openapi/dist/**/*.js',
+    content: [
+        './node_modules/fumadocs-ui/dist/**/*.js',
+        './node_modules/fumadocs-openapi/dist/**/*.js',
 
-    './components/**/*.{ts,tsx}',
-    './app/**/*.{ts,tsx}',
-    './content/**/*.{md,mdx}',
-    './mdx-components.{ts,tsx}',
-  ],
+        './components/**/*.{ts,tsx}',
+        './components/**/*.{js,jsx}',
+        './app/**/*.{ts,tsx}',
+        './app/**/*.{js,jsx}',
+        './lib/**/*.{ts,tsx}',
+        './lib/**/*.{js,jsx}',
+        './content/**/*.{md,mdx}',
+        './mdx-components.tsx',
+    ],
   presets: [createPreset({
       preset: twilightPreset,
       layoutWidth: '1400px',
@@ -89,7 +92,6 @@ export default {
     			md: 'calc(var(--radius) - 2px)',
     			sm: 'calc(var(--radius) - 4px)'
     		},
-    		colors: {},
             animation: {
                 'ping': 'ping 1.5s cubic-bezier(0, 0, 0.2, 1) infinite',
             },

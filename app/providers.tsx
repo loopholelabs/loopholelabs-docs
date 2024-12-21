@@ -13,6 +13,7 @@ const CustomSearchDialog = dynamic(() => import('@/components/Search/Search'));
 
 export function RootProvider({children, posthogBootstrap}: { children: ReactNode, posthogBootstrap?: any }) {
     const [searchOpen, setSearchOpen] = useState(false);
+    const basePath = '/docs'
     const path = usePathname();
     let defaultTag = '';
     if (path.startsWith('/polyglot')) {
@@ -31,7 +32,7 @@ export function RootProvider({children, posthogBootstrap}: { children: ReactNode
             <SearchContext.Provider value={{searchOpen: searchOpen, setSearchOpen: setSearchOpen}}>
                 <Root search={{
                     SearchDialog: CustomSearchDialog, options: {
-                        api: '/docs/api/search',
+                        api: `${basePath}/api/search`,
                         defaultTag: defaultTag,
                         tags: [
                             {

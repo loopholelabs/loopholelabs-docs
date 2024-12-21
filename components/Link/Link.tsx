@@ -1,12 +1,12 @@
 // Module imports
 import NextLink from 'next/link'
+import type {ReactNode} from "react";
 
 // Local imports
 import { ExternalLink } from '@/components/ExternalLink/ExternalLink'
-import React from "react";
 
 interface LinkProps {
-    children: React.ReactNode;
+    children: ReactNode;
     className?: string;
     href: string;
     title?: string;

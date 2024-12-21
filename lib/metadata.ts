@@ -2,17 +2,17 @@ import { createMetadataImage } from 'fumadocs-core/server';
 import {architectSource, polyglotSource, scaleSource} from '@/app/source';
 
 export const architectMetadataImage = createMetadataImage({
-    imageRoute: '/docs/architect-docs-og',
+    imageRoute: '/architect-docs-og',
 
     source: architectSource,
 });
 
 export const scaleMetadataImage = createMetadataImage({
-    imageRoute: '/docs/scale-docs-og',
+    imageRoute: '/scale-docs-og',
     source: scaleSource,
 });
 
 export const polyglotMetadataImage = createMetadataImage({
-    imageRoute: '/docs/polyglot-docs-og',
+    imageRoute: '/polyglot-docs-og',
     source: polyglotSource,
 });

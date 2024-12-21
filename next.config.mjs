@@ -6,6 +6,9 @@ const withMDX = createMDX();
 const config = {
   reactStrictMode: true,
   basePath: '/docs',
+  sassOptions: {
+    silenceDeprecations: ["legacy-js-api"],
+  },
   async redirects() {
     return [
       {

@@ -1,0 +1,13 @@
+main = "wrangler.js"
+name = "loopholelabs-io-docs"
+compatibility_date = "2024-09-23"
+compatibility_flags = ["nodejs_compat"]
+assets = { directory = ".open-next/assets", binding = "ASSETS", experimental_serve_directly = false }
+
+[[kv_namespaces]]
+binding = "NEXT_CACHE_WORKERS_KV"
+id = "cc3b22e431e146e1a36c99cc517614a0"
+
+[vars]
+NEXT_PUBLIC_POSTHOG_KEY = "phc_ROI4hShMvIq47MpdUs6ezbtncfQhqkRCebezH4qBUEr"
+NEXT_PUBLIC_POSTHOG_HOST = "https://data.loopholelabs.io"

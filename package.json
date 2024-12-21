@@ -3,7 +3,7 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build:worker": "opennextjs-cloudflare && yarn worker:remove-prettier",
+    "build:worker": "rm -rf .next && rm -rf .open-next && opennextjs-cloudflare && yarn worker:remove-prettier",
     "dev:worker": "wrangler dev --port 8771",
     "preview:worker": "yarn build:worker && yarn dev:worker",
     "deploy:worker": "yarn build:worker && wrangler deploy",

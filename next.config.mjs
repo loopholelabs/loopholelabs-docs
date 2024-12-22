@@ -9,6 +9,10 @@ const config = {
   sassOptions: {
     silenceDeprecations: ["legacy-js-api"],
   },
+  i18n: {
+    locales: ['en-US'],
+    defaultLocale: 'en-US',
+  },
   async redirects() {
     return [
       {

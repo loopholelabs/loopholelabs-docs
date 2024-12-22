@@ -2,7 +2,6 @@ import './global.css';
 
 import {ThemeProvider} from "next-themes";
 import {Inter} from 'next/font/google';
-import localFont from 'next/font/local'
 import type {Metadata} from 'next/types';
 import {type ReactNode, useMemo} from 'react';
 

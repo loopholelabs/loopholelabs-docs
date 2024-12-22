@@ -3,11 +3,15 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "build:worker": "rm -rf .next && rm -rf .open-next && opennextjs-cloudflare && yarn worker:remove-prettier",
+    "build:worker": "rm -rf .next && rm -rf .open-next && opennextjs-cloudflare && yarn prepare-worker",
     "dev:worker": "wrangler dev --port 8771",
     "preview:worker": "yarn build:worker && yarn dev:worker",
     "deploy:worker": "yarn build:worker && wrangler deploy",
-    "worker:remove-prettier": "npx replace '[a-zA-Z]\\.exports=import\\(\"prettier\"\\)' '' . -r",
+
+    "prepare-worker": "yarn prepare-worker:remove-prettier && yarn prepare-worker:create-subdirectory",
+    "prepare-worker:remove-prettier": "npx replace '[a-zA-Z]\\.exports=import\\(\"prettier\"\\)' '' . -r",
+    "prepare-worker:create-subdirectory": "mkdir .open-next/assets/docs && (mv .open-next/assets/* .open-next/assets/docs || true)",
+
     "build": "next build",
     "dev": "next dev",
     "postinstall": "fumadocs-mdx",

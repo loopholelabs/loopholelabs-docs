@@ -2,7 +2,7 @@ main = "wrangler.js"
 name = "loopholelabs-io-docs"
 compatibility_date = "2024-09-23"
 compatibility_flags = ["nodejs_compat"]
-assets = { directory = ".open-next/assets", binding = "ASSETS", experimental_serve_directly = false }
+assets = { directory = ".open-next/assets", binding = "ASSETS"}
 
 workers_dev = false
 routes = [

@@ -20,22 +20,13 @@ export default {
                 await populateProcessEnv(url, env.NEXTJS_ENV);
                 process.env.__PROCESS_ENV_POPULATED = "1";
             }
-            if(url.pathname.startsWith("/docs")) {
-                url.pathname = url.pathname.replace("/docs", "");
-            }
-            if (url.pathname === "/_next/image") {
-                let imageUrl = url.searchParams.get("url") ?? "";
+            if (url.pathname === "/docs/_next/image") {
+                const imageUrl = url.searchParams.get("url") ?? "";
                 if(imageUrl.startsWith("/")) {
-                    if(imageUrl.startsWith("/docs")) {
-                        imageUrl = imageUrl.replace("/docs", "");
-                    }
                     return env.ASSETS.fetch(new URL(imageUrl, request.url));
                 } else {
                     return fetch(imageUrl, { cf: { cacheEverything: true } });
                 }
-            }
-            if (url.pathname.startsWith("/_next/static")) {
-                return env.ASSETS.fetch(url);
             }
             // The Middleware handler can return either a `Response` or a `Request`:
             // - `Response`s should be returned early

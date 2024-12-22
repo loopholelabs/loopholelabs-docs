@@ -6,8 +6,8 @@ assets = { directory = ".open-next/assets", binding = "ASSETS"}
 
 workers_dev = false
 routes = [
-    { pattern = "loopholelabs.io/docs", zone_id = "93d6f5f45cf89453cef2a87ec27f8b29" },
-    { pattern = "loopholelabs.io/docs/*", zone_id = "93d6f5f45cf89453cef2a87ec27f8b29" }
+    { pattern = "loopholelabs.io/docs", zone_name = "loopholelabs.io" },
+    { pattern = "loopholelabs.io/docs/*", zone_name = "loopholelabs.io" }
 ]
 
 [[kv_namespaces]]

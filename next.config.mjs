@@ -16,11 +16,6 @@ const config = {
   async redirects() {
     return [
       {
-        source: '/',
-        destination: '/scale',
-        permanent: false,
-      },
-      {
         source: '/scale/cli/reference',
         destination: '/scale/cli/reference/flags',
         permanent: false,

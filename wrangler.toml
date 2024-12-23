@@ -5,6 +5,7 @@ compatibility_flags = ["nodejs_compat"]
 assets = { directory = ".open-next/assets", binding = "ASSETS"}
 
 workers_dev = false
+preview_urls = false
 routes = [
     { pattern = "loopholelabs.io/docs", zone_name = "loopholelabs.io" },
     { pattern = "loopholelabs.io/docs/*", zone_name = "loopholelabs.io" }

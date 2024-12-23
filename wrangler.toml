@@ -10,6 +10,10 @@ routes = [
     { pattern = "loopholelabs.io/docs/*", zone_name = "loopholelabs.io" }
 ]
 
+services = [
+    { binding = "SVG2PNG", service = "svg-to-png" }
+]
+
 [[kv_namespaces]]
 binding = "NEXT_CACHE_WORKERS_KV"
 id = "cc3b22e431e146e1a36c99cc517614a0"

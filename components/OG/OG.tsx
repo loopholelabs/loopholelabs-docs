@@ -1,5 +1,5 @@
 // Module imports
-import {ImageResponse} from 'next/og';
+import satori from 'satori';
 import type {ReactNode} from "react";
 
 // Local imports
@@ -26,19 +26,28 @@ const fonts = [
 ]
 
 interface DocsOGImageProps {
+    env: CloudflareEnv
     title: string
     description: string
     section: string,
     icon: ReactNode
 }
 
-export function GenerateDocsOGImage(props: DocsOGImageProps): ImageResponse {
-    return new ImageResponse(DocsOGImage(props), {
+export async function GenerateDocsOGImage(props: DocsOGImageProps) {
+    if (process.env.OPEN_NEXT_ORIGIN === undefined) {
+        return new Response(null, {
+            status: 404,
+        })
+    }
+    const svg = await satori(DocsOGImage(props), {
         width: 1200,
         height: 630,
         // @ts-ignore
         fonts: fonts,
-    },);
+    });
+    // @ts-ignore
+    const png = await props.env.SVG2PNG.convert(svg)
+    return new Response(png, { headers: { 'content-type': 'image/png' } });
 }
 
 export function DocsOGImage({title, description, section, icon}: DocsOGImageProps) {

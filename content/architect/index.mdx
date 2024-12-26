@@ -5,5 +5,19 @@ description: An Overview of Architect from Loophole Labs
 
 Architect documentation is coming soon! 
 
-##Introduction
-Architect continuously captures the complete state of your running application - including CPU, memory, and GPU state and failure, pre-emption, or other event, it will migrate your application to different computing resources or roll back to a recent healthy state, with virtually no data loss or downtime.  It addresses the challenge of extreme low latency movement of a workload across compute at the lower layers of the stack to deliver “live” migrations.
+
+## Introduction
+Architect continuously captures the complete state of your running application, including CPU, memory, and GPU state and upon failure, pre-emption, or other event, it will migrate your application to different computing resources or roll back to a recent healthy state, with virtually no data loss or downtime. It addresses the challenge of extreme low latency movement of a workload across compute at the lower layers of the stack to deliver “live” migrations.
+
+Architect has the following characteristics:
+
+* **Live Migration**: Upon migration event, Architect moves a running application to new computing resources without interruption.  
+* **State Capture Without Checkpoints**: Architect continuously monitors and preserves application state in real-time and does not require checkpoints.   
+* **No Application Modification Required**: Architect works with your applications as-is \- no code modifications or checkpoints are necessary.   
+* **Infrastructure Flexibility**: Architect lets you move applications between any computing resources \- different cloud providers, different regions, CPU types, etc…  
+* **Low Performance Impact:** Continuous state capture has minimal impact on application performance.
+
+Architect can handle any type of application: databases, game servers, video processing, data pipelines and more. It is designed to make computing resources truly interchangeable and will allow you to run your application anywhere, anytime, without worrying about the underlying infrastructure. 
+
+### How Architect Works
+There are three key challenges that Architect addresses to deliver a “live” migration: 1\) it allows the underlying kernel to be deployed on any compute instance, 2\) it amortizes the movement of a live image of any size from one compute to another to address physical latencies and 3\) it allows for a redirect of network traffic to the new instance without downtime. 

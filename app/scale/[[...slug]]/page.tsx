@@ -1,23 +1,28 @@
-import {
-    DocsPage,
-    DocsBody,
-    DocsDescription,
-    DocsTitle,
-} from 'fumadocs-ui/page';
+import {DocsPage, DocsBody, DocsDescription, DocsTitle} from 'fumadocs-ui/page';
 import {notFound} from 'next/navigation';
 import defaultMdxComponents from 'fumadocs-ui/mdx';
 import { Tab, Tabs } from 'fumadocs-ui/components/tabs';
 import type {ReactElement} from "react";
+import { redirect } from 'next/navigation'
 
 import {scaleSource, scaleOpenAPI} from '@/app/source';
 import {scaleMetadataImage} from "@/lib/metadata";
+import {scaleRedirects as redirects} from '@/lib/redirects';
 
 export const dynamic = 'force-static';
 
 export default async function Page(props: { params: Promise<{ slug: string[] }>; }): Promise<ReactElement> {
     const params = await props.params;
     const page = scaleSource.getPage(params.slug);
-    if (!page) notFound();
+    if (!page) {
+        // @ts-ignore
+        if (redirects[params.slug[0]] !== undefined) {
+            // @ts-ignore
+            return redirect(redirects[params.slug[0]]);
+        } else {
+            notFound();
+        }
+    }
 
     const MDX = page.data.body;
 
@@ -55,7 +60,15 @@ export async function generateStaticParams() {
 export async function generateMetadata(props: { params: Promise<{ slug?: string[] }>; }) {
     const params = await props.params;
     const page = scaleSource.getPage(params.slug);
-    if (!page) notFound();
+    if (!page) {
+        // @ts-ignore
+        if (redirects[params.slug[0]] !== undefined) {
+            // @ts-ignore
+            return redirect(redirects[params.slug[0]]);
+        } else {
+            notFound();
+        }
+    }
 
     return scaleMetadataImage.withImage(page.slugs, {
         metadataBase: new URL('https://loopholelabs.io/docs'),

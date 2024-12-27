@@ -28,6 +28,8 @@ export const metadata: Metadata = {
     category: 'technology',
 }
 
+export const dynamic = 'force-dynamic';
+
 export default async function Layout({children}: { children: ReactNode }) {
     const compiledClassName = useMemo(() => cn(
         interFont.variable,

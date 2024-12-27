@@ -10,7 +10,8 @@ const index = [
     ...architectSource.getPages().map((page) => {
         return {
             url: url(page.url),
-            lastModified: page.data.lastModified,
+            // @ts-ignore
+            lastModified: new Date(page.data.lastModified),
             changeFrequency: 'weekly',
             priority: 0.5,
         } as MetadataRoute.Sitemap[number];
@@ -18,7 +19,8 @@ const index = [
     ...scaleSource.getPages().map((page) => {
         return {
             url: url(page.url),
-            lastModified: page.data.lastModified,
+            // @ts-ignore
+            lastModified: new Date(page.data.lastModified),
             changeFrequency: 'weekly',
             priority: 0.5,
         } as MetadataRoute.Sitemap[number];
@@ -26,7 +28,8 @@ const index = [
     ...polyglotSource.getPages().map((page) => {
         return {
             url: url(page.url),
-            lastModified: page.data.lastModified,
+            // @ts-ignore
+            lastModified: new Date(page.data.lastModified),
             changeFrequency: 'weekly',
             priority: 0.5,
         } as MetadataRoute.Sitemap[number];

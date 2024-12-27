@@ -3,16 +3,12 @@ title: Introduction
 description: An Overview of Architect from Loophole Labs
 ---
 
-Architect documentation is coming soon! 
-
-
-## Introduction
 Architect continuously captures the complete state of your running application, including CPU, memory, and GPU state and upon failure, pre-emption, or other event, it will migrate your application to different computing resources or roll back to a recent healthy state, with virtually no data loss or downtime. It addresses the challenge of extreme low latency movement of a workload across compute at the lower layers of the stack to deliver “live” migrations.
 
 Architect has the following characteristics:
 
 * **Live Migration**: Upon migration event, Architect moves a running application to new computing resources without interruption.  
-* **State Capture Without Checkpoints**: Architect continuously monitors and preserves application state in real-time and does not require checkpoints.   
+* **State Capture Without Checkpoints**: Architect continuously captures and serializes application state in real-time and does not require checkpoints.
 * **No Application Modification Required**: Architect works with your applications as-is \- no code modifications or checkpoints are necessary.   
 * **Infrastructure Flexibility**: Architect lets you move applications between any computing resources \- different cloud providers, different regions, CPU types, etc…  
 * **Low Performance Impact:** Continuous state capture has minimal impact on application performance.

@@ -3,17 +3,37 @@ title: Introduction
 description: An Overview of Architect from Loophole Labs
 ---
 
-Architect continuously captures the complete state of your running application, including CPU, memory, and GPU state and upon failure, pre-emption, or other event, it will migrate your application to different computing resources or roll back to a recent healthy state, with virtually no data loss or downtime. It addresses the challenge of extreme low latency movement of a workload across compute at the lower layers of the stack to deliver “live” migrations.
+Architect enables any application to run continuously on spot instances with zero downtime and zero data loss during
+preemption events - all without requiring code modifications. By making spot instance preemption irrelevant,
+Architect unlocks immediate 75%+ infrastructure cost savings while maintaining production-grade reliability.
 
-Architect has the following characteristics:
+### Key Features
 
-* **Live Migration**: Upon migration event, Architect moves a running application to new computing resources without interruption.  
-* **State Capture Without Checkpoints**: Architect continuously captures and serializes application state in real-time and does not require checkpoints.
-* **No Application Modification Required**: Architect works with your applications as-is \- no code modifications or checkpoints are necessary.   
-* **Infrastructure Flexibility**: Architect lets you move applications between any computing resources \- different cloud providers, different regions, CPU types, etc…  
-* **Low Performance Impact:** Continuous state capture has minimal impact on application performance.
-
-Architect can handle any type of application: databases, game servers, video processing, data pipelines and more. It is designed to make computing resources truly interchangeable and will allow you to run your application anywhere, anytime, without worrying about the underlying infrastructure. 
+- **Zero Downtime Migration:** Continuously capture and transfer application state between compute resources within the preemption window, maintaining active network connections without interruption
+- **No Code Changes Required:** Deploy existing applications on spot instances without implementing checkpoint/restore logic or other modifications
+- **Complete State Preservation:** Retain all application state during migrations, including CPU, memory, and GPU state
+- **Cross-Environment Compatibility:** Seamlessly move workloads between different CPU architectures, GPU types, cloud providers, and regions
+- **Universal Workload Support:** Run any application on spot instances - from ML training and inference to databases, game servers, and data pipelines
 
 ### How Architect Works
-There are three key challenges that Architect addresses to deliver a “live” migration: 1\) it allows the underlying kernel to be deployed on any compute instance, 2\) it amortizes the movement of a live image of any size from one compute to another to address physical latencies and 3\) it allows for a redirect of network traffic to the new instance without downtime. 
+
+Unlike traditional checkpoint-based approaches, Architect takes a fundamentally different approach to handling spot
+instance preemption:
+
+1. **Continuous State Capture:** Efficiently serialize and store application state to passive storage (EBS, S3, etc.)
+2. **Preemption Detection:** Receive and respond to cloud provider preemption notices automatically
+3. **Resource Acquisition:** Identify and secure target compute resources across available providers
+4. **Live Migration:** Stream application state to the new instance, combining previously captured state with live changes
+5. **Traffic Management:** Automatically reroute network connections without dropping active sessions
+
+The entire process completes within the preemption window, making instance termination irrelevant to your running applications.
+
+### Going Beyond Spot Instances
+
+While immediate cost savings through spot instance usage is a primary benefit, Architect's capabilities extend far beyond:
+
+- Deploy truly portable multi-cloud infrastructure
+- Perform zero-downtime hardware upgrades
+- Optimize geographic placement for latency
+- Eliminate downtime from resource failures
+- Move compute closer to users on demand
